@@ -17,56 +17,114 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
+  color: var(--background);
+  background: var(--foreground);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --foreground-light: #ffffff1a;
+  
+  --primary: rgb(105, 105, 255);
+  --primary-text: #fafafa;
+  --primary-hover: rgb(126, 126, 255);
+  --primary-active: #404040;
+  --primary-focus: #404040;
+  --primary-logo: #b732f5;
+  --primary-badge: #525252;
+
+  --secondary: #f5f5f5;
+  --secondary-text: #6b6b6d;
+  --secondary-hover: #e5e5e5;
+  --secondary-focus: #d4d4d4;
+  --secondary-logo: #1e3268;
+
+  --destructive: #ef4444;
+  --destructive-text: #ffffff;
+  --destructive-hover: #dc2626;
+  --destructive-active: #b91c1c;
+
+  --theme-primary: #b732f5;
+  --theme-primary-text: #fff;
+  --theme-primary-hover: #c55bf7;
+  --theme-primary-active: #9228c4;
+  --theme-primary-focus: #9228c4;
+  --theme-primary-outline-hover: #f9ebff;
+
+  --muted: #f5f5f5;
+  --muted-text: #6b6b6d;
+
+  --accent: #f4f4f5;
+  --accent-text: #111827;
+  --accent-active: #fefce8;
+
+  --invert: #ffffff;
+  --ghost: #fafafa;
+  --border: #e5e5e5;
+  --input: #e5e7eb;
+  --ring: #0a0a0a;
+  --radius: 0.5rem;
+
+  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 10, 10, 10;
+  --card-secondary-text: #404040;
+  --card-opacity-background: rgba(255, 255, 255, 0.60);
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
+
+.hide-password-toggle::-ms-reveal,
+.hide-password-toggle::-ms-clear {
+  visibility: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@media (min-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #e5e5e5;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #d4d4d4;
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
