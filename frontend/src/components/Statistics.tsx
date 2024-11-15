@@ -10,22 +10,22 @@ import badge4 from '../assets/66918.svg';
 const badgesData = [
     {
         name: "Badge",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, repudiandae iste placeat perferendis inventore, quibusdam dolor, possimus nemo quia odio illo a necessitatibus neque tempore culpa aspernatur veritatis provident? Possimus. Nobis, suscipit? Commodi assumenda voluptate saepe asperiores illum eos iste tempora accusantium corrupti minima. Blanditiis quia similique, ab quibusdam deserunt nostrum labore. Magnam animi quos iure qui aliquid adipisci quaerat?",
+        description: "Lorem ipsum dolor sit amet",
         img: badge1
     },
     {
         name: "Badge",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, repudiandae iste placeat perferendis inventore, quibusdam dolor, possimus nemo quia odio illo a necessitatibus neque tempore culpa aspernatur veritatis provident? Possimus. Nobis, suscipit? Commodi assumenda voluptate saepe asperiores illum eos iste tempora accusantium corrupti minima. Blanditiis quia similique, ab quibusdam deserunt nostrum labore. Magnam animi quos iure qui aliquid adipisci quaerat?",
+        description: "Lorem ipsum dolor sit amet",
         img: badge2
     },
     {
         name: "Badge",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, repudiandae iste placeat perferendis inventore, quibusdam dolor, possimus nemo quia odio illo a necessitatibus neque tempore culpa aspernatur veritatis provident? Possimus. Nobis, suscipit? Commodi assumenda voluptate saepe asperiores illum eos iste tempora accusantium corrupti minima. Blanditiis quia similique, ab quibusdam deserunt nostrum labore. Magnam animi quos iure qui aliquid adipisci quaerat?",
+        description: "Lorem ipsum dolor sit amet",
         img: badge3
     },
     {
         name: "Badge",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, repudiandae iste placeat perferendis inventore, quibusdam dolor, possimus nemo quia odio illo a necessitatibus neque tempore culpa aspernatur veritatis provident? Possimus. Nobis, suscipit? Commodi assumenda voluptate saepe asperiores illum eos iste tempora accusantium corrupti minima. Blanditiis quia similique, ab quibusdam deserunt nostrum labore. Magnam animi quos iure qui aliquid adipisci quaerat?",
+        description: "Lorem ipsum dolor sit amet",
         img: badge4
     }
 ]
