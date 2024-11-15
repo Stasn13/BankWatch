@@ -9,10 +9,14 @@ function App() {
 
   return (
     <Web3Provider>
-      <Statistics />
-      <section className="mt-8">badges(attestattions) list</section>
-      <section className="mt-8">APY of various tokens through some lend/borrow protocols (aave, ...)</section>
-      <Button variant="primary">tst</Button>
+      <div className="flex flex-row gap-4 flex-wrap">
+        <Statistics />
+        <Card className="bg-foreground-light w-[320px]">statistics list (health score, available value, percentage etc)</Card>
+        <Card className="bg-foreground-light flex-1">commercial with CTA to check eligibility another wallet</Card>
+        <Card className="bg-foreground-light" wrapperClassName="w-full">badges(attestattions) list</Card>
+        <section className="mt-8 w-full">APY of various tokens through some lend/borrow protocols (aave, ...)</section>
+        <Button variant="primary">tst</Button>
+      </div>
     </Web3Provider>
   )
 }
