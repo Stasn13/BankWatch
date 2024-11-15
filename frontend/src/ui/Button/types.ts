@@ -13,7 +13,7 @@ export const buttonVariants = cva(
         tertiary:
           'bg-secondary hover:bg-secondary-hover active:bg-secondary-focus',
         outline:
-          'border border-border bg-background hover:bg-ghost active:bg-secondary',
+          'border border-primary hover:bg-primary active:bg-primary',
         ghost: 'hover:bg-ghost active:bg-secondary',
         link: 'text-ui-accent-500 underline-offset-4 hover:text-ui-accent-600 active:text-ui-accent-500',
         destructive:
