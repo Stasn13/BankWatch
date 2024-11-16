@@ -1,32 +1,33 @@
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import clsx from 'clsx';
-import bg1 from "../assets/img/purple-gradient.png";
-import bg2 from "../assets/img/bg2.png";
-import { Typography } from '../ui/Typography';
 
-type BannerProps = {
-    className?: string
-    wrapperClassName?: string
+import { Typography } from '../ui/Typography';
+import { CardComponentProps } from '../ui/Card/types';
+
+type BannerProps = CardComponentProps & {
+    text?: string
+    buttonText?: string
 }
 
-const Banner = ({ className, wrapperClassName }: BannerProps) => {
+const Banner = ({ className, wrapperClassName, bgImg, text, buttonText }: BannerProps) => {
 
     return (
         <Card
             className={clsx(className, "bg-foreground-light text-left")}
             wrapperClassName={clsx(wrapperClassName, "overflow-hidden")}
-            bgImg={bg2}
+            bgImg={bgImg}
         >
             <Typography
-                size='heading5'>
-                Commercial with CTA to check eligibility another wallet
+                size='heading5'
+            >
+                {text}
             </Typography>
             <Button
                 variant="primary"
                 className="absolute bottom-4 right-4"
             >
-                tst
+                {buttonText}
             </Button>
         </Card>
     )

@@ -21,11 +21,15 @@ function App() {
           <Statistics className="w-[320px]" />
           <Banner wrapperClassName="flex-1"
             bgImg={bg2}
+            text="Now you can observe other wallets eligibility"
+            buttonText="Discover"
           />
           <Card className="bg-foreground-light" wrapperClassName="w-full">badges(attestattions) list</Card>
           <section className="mt-8 w-full">APY of various tokens through some lend/borrow protocols (aave, ...)</section>
           <Banner
             wrapperClassName="w-full"
+            text="Mint your score Attestation"
+            buttonText="Claim"
             bgImg={bg1}
           />
         </div>
