@@ -1,53 +1,51 @@
 import { useReadContract } from 'wagmi';
+import { abi } from '../abi/aave-contract'
+
+import { lineaSepolia, sepolia } from 'wagmi/chains';
 import { Card } from '../ui/Card';
-import BadgeCard from '../ui/BadgeCard';
+import clsx from 'clsx';
+import { formatUnits, etherUnits } from 'viem'
+import { Typography } from '../ui/Typography';
 
-import badge1 from '../assets/64182.svg';
-import badge2 from '../assets/64183.svg';
-import badge3 from '../assets/66917.svg';
-import badge4 from '../assets/66918.svg';
+type StatisticsProps = {
+    className?: string
+}
 
-const badgesData = [
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge1
-    },
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge2
-    },
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge3
-    },
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge4
-    }
-]
-
-const Statistics = () => {
-
-    const { data } = useReadContract({
-        // ...wagmiContractConfig,
-        functionName: 'balanceOf',
+const Statistics = ({ className }: StatisticsProps) => {
+    const { data, isLoading } = useReadContract({
+        abi,
+        address: "0x6Ae43d3271ff6888e7Fc43Fd7321a503ff738951",
+        functionName: 'getUserAccountData',
+        chainId: sepolia.id,
+        // chainId: lineaSepolia.id,
         args: ['0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83'], // todo: Change to user address
+        // contract to read 0x6Ae43d3271ff6888e7Fc43Fd7321a503ff738951
+        // old - 0x0562453c3DAFBB5e625483af58f4E6D668c44e19
     })
 
-    console.log(data)
+    if (isLoading) return;
+
+    const healthScore = Number(formatUnits((data as bigint[])[5], etherUnits.wei)).toFixed(2); // > 3 = yellow, > 2 = red
+    const totalDebt = (Number(formatUnits((data as bigint[])[1], etherUnits.gwei)) * 10).toFixed(2);
+    const totalCollateralBase = (Number(formatUnits((data as bigint[])[0], etherUnits.gwei)) * 10).toFixed(2)
+    const borrowData = [
+        { name: "Health score:", value: healthScore },
+        { name: "Total debt:", value: `${totalDebt}$` },
+        { name: "Total collateral:", value: `${totalCollateralBase}$` },
+    ]
+
+    console.log(data, healthScore)
 
     return (
-        <Card className="bg-foreground-light">
-            <section className="mt-8">Historical data of user lend/borrow interaction with calculating of Health Rate</section>
-            <div className="flex gap-3">
-                {badgesData.map(badge => <BadgeCard badge={badge}/>)}
-                {/* <BadgeCard />
-                <BadgeCard />
-                <BadgeCard /> */}
+        <Card className={clsx(className, "bg-foreground-light text-left")}>
+            <Typography className="mb-4">Wallet borrow data: </Typography>
+            <div>
+                {borrowData.map(({ name, value }) => (
+                    <div className="flex justify-between mb-1">
+                        <span>{name}</span>
+                        <span>{value}</span>
+                    </div>
+                ))}
             </div>
         </Card>
     )
