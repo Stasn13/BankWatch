@@ -36,9 +36,6 @@ const Badges = () => {
             <section className="mb-8">Historical data of user lend/borrow interaction with calculating of Health Rate</section>
             <div className="flex gap-3">
                 {badgesData.map(badge => <BadgeCard badge={badge} key={badge.name}/>)}
-                {/* <BadgeCard />
-                <BadgeCard />
-                <BadgeCard /> */}
             </div>
         </Card>
     )
