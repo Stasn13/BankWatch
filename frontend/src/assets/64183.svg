@@ -32,10 +32,6 @@
        id="g10"
        transform="scale(0.1)">
       <path
-         d="M 0,0 H 10000 V 10000 H 0 Z"
-         style="fill:#f4f4f4;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path12" />
-      <path
          d="M 2795.94,4155.68 H 770 l 488.91,674.99 -488.91,675 h 1033.06 v -689.01 l 942.13,-618.77 v 595.09 h 50.75 v -637.3"
          style="fill:#2f4c86;fill-opacity:1;fill-rule:nonzero;stroke:none"
          id="path14" />
