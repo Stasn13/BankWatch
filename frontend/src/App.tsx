@@ -5,6 +5,7 @@ import { Button } from './ui/Button'
 import { Card } from './ui/Card'
 import { wagmiConfig as config, Web3Provider } from './web3provider'
 import Badges from './components/Badges'
+import Banner from './components/Banner'
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
         <div className="flex flex-row gap-4 flex-wrap">
           <Badges />
           <Statistics className="w-[320px]"/>
-          <Card className="bg-foreground-light flex-1">commercial with CTA to check eligibility another wallet <Button variant="primary">tst</Button></Card>
+          <Banner wrapperClassName="flex-1"/>
           <Card className="bg-foreground-light" wrapperClassName="w-full">badges(attestattions) list</Card>
           <section className="mt-8 w-full">APY of various tokens through some lend/borrow protocols (aave, ...)</section>
         </div>
