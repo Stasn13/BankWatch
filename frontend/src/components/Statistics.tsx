@@ -38,7 +38,11 @@ const Statistics = ({ className }: StatisticsProps) => {
 
     return (
         <Card className={clsx(className, "bg-foreground-light text-left")}>
-            <Typography className="mb-4">Wallet borrow data: </Typography>
+            <Typography
+                className="mb-4"
+                size='heading5'
+            >Wallet borrow data:
+            </Typography>
             <div>
                 {borrowData.map(({ name, value }) => (
                     <div className="flex justify-between mb-1">
