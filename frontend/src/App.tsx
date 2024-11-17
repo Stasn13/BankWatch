@@ -35,7 +35,24 @@ function App() {
             text="Now you can observe other wallets eligibility"
             buttonText="Discover"
           />
-          <Card className="bg-foreground-light" wrapperClassName="w-full">badges(attestattions) list</Card>
+          <Card className="bg-foreground-light" wrapperClassName="w-full">
+            <section className="mb-8">Historical data of user lend/borrow interaction with calculating of Health Rate</section>
+            {/* {
+  repays(where:{user: "0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83"}, orderBy: blockTimestamp, orderDirection: desc) {
+    user
+    amount
+    blockTimestamp
+    reserve
+  }
+  borrows(where:{user: "0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83"}) {
+    id
+    reserve
+    user
+    onBehalfOf
+    amount
+  }
+} */}
+          </Card>
           <section className="mt-8 w-full">APY of various tokens through some lend/borrow protocols (aave, ...)</section>
           <Banner
             wrapperClassName="w-full"

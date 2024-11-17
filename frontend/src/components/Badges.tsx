@@ -33,9 +33,8 @@ const Badges = () => {
 
     return (
         <Card className="bg-foreground-light">
-            <section className="mb-8">Historical data of user lend/borrow interaction with calculating of Health Rate</section>
             <div className="flex gap-3">
-                {badgesData.map(badge => <BadgeCard badge={badge} key={badge.name}/>)}
+                {badgesData.map(badge => <BadgeCard badge={badge} key={badge.name} />)}
             </div>
         </Card>
     )
