@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { cva } from 'class-variance-authority';
 
-export const titleVariants = cva('text-base font-semibold text-primary-text', {
+export const titleVariants = cva('font-semibold text-primary-text', {
   variants: {
     size: {
       heading1: 'text-5xl' /* 48px */,
