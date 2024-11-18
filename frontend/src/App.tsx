@@ -1,6 +1,6 @@
 import Statistics from './components/Statistics'
 import { Card } from './ui/Card'
-import { wagmiConfig as config, Web3Provider } from './web3provider'
+import { Web3Provider } from './web3provider'
 import Badges from './components/Badges'
 import Banner from './components/Banner'
 
