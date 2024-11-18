@@ -1,9 +1,10 @@
+import { badgesData } from "../../components/Badges";
 import { Button } from "../Button";
 import { Card } from "../Card"
 import { Typography } from "../Typography";
 
 
-const BadgeCard = ({ badge }) => {
+const BadgeCard = ({ badge }: {badge: typeof badgesData[0]}) => {
     const { img, name, description } = badge
 
     return (

@@ -6,7 +6,7 @@ import badge2 from '../assets/64183.svg';
 import badge3 from '../assets/66917.svg';
 import badge4 from '../assets/66918.svg';
 
-const badgesData = [
+export const badgesData = [
     {
         name: "Badge",
         description: "Lorem ipsum dolor sit amet",

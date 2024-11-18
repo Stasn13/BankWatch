@@ -1,7 +1,7 @@
 import { useReadContract } from 'wagmi';
 import { abi } from '../abi/aave-contract'
 
-import { lineaSepolia, sepolia } from 'wagmi/chains';
+import { sepolia } from 'wagmi/chains';
 import { Card } from '../ui/Card';
 import clsx from 'clsx';
 import { formatUnits, etherUnits } from 'viem'
