@@ -30,7 +30,7 @@ function App() {
               Dashboard
             </Typography>
           </Card>
-          <Badges />
+          <Badges veraxSdk={veraxSdk} />
           <Statistics className="w-[320px]" />
           <Banner wrapperClassName="flex-1"
             bgImg={bg2}
