@@ -8,8 +8,10 @@ import bg1 from "./assets/img/purple-gradient.png";
 import bg2 from "./assets/img/bg2.png";
 import Navigation from './components/Navigation'
 import { Typography } from './ui/Typography'
+import { VeraxSdk } from '@verax-attestation-registry/verax-sdk'
 
 function App() {
+  const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND);
 
   return (
     <Web3Provider>
