@@ -45,7 +45,7 @@ const Statistics = ({ className }: StatisticsProps) => {
             </Typography>
             <div>
                 {borrowData.map(({ name, value }) => (
-                    <div className="flex justify-between mb-1">
+                    <div className="flex justify-between mb-1" key={name}>
                         <span>{name}</span>
                         <span>{value}</span>
                     </div>
