@@ -1,10 +1,10 @@
-import { badgesData } from "../../components/Badges";
+import { badgesData } from "../../constants";
 import { Button } from "../Button";
 import { Card } from "../Card"
 import { Typography } from "../Typography";
 
 
-const BadgeCard = ({ badge }: {badge: typeof badgesData[0]}) => {
+const BadgeCard = ({ badge, onClick }: {badge: typeof badgesData[0], onClick: () => void}) => {
     const { img, name, description } = badge
 
     return (
@@ -15,7 +15,7 @@ const BadgeCard = ({ badge }: {badge: typeof badgesData[0]}) => {
                     background: "linear-gradient(217deg, #000, rgba(255,0,0,0) 70.71%), linear-gradient(138deg, #000000, rgba(0,255,0,0) 70.71%), linear-gradient(319deg, #434343, rgba(0,0,255,0) 90.71%)"
                 }} />
             <Typography className="text-left mb-2">{description}</Typography>
-            <Button className="ml-auto" size="sm" variant="outline">Mint</Button>
+            <Button className="ml-auto" size="sm" variant="outline" onClick={onClick}>Mint</Button>
         </Card>
     )
 }
