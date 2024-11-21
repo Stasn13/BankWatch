@@ -1,56 +1,36 @@
 import { Card } from '../ui/Card';
 import BadgeCard from '../ui/BadgeCard';
+import { useAccount, useReadContract } from 'wagmi';
+import { badgesData, LINEA_SEPOLIA_HEALTH10_BADGE, LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants';
+import { useEffect, useState } from 'react';
+import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk';
+import { Typography } from '../ui/Typography';
+import clsx from 'clsx';
 
-import badge1 from '../assets/64182.svg';
-import badge2 from '../assets/64183.svg';
-import badge3 from '../assets/66917.svg';
-import badge4 from '../assets/66918.svg';
-import { useReadContract } from 'wagmi';
-import { LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants';
-import { useEffect } from 'react';
-
-
-export const badgesData = [
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge1
-    },
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge2
-    },
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge3
-    },
-    {
-        name: "Badge",
-        description: "Lorem ipsum dolor sit amet",
-        img: badge4
-    }
-]
-
-const Badges = ({ veraxSdk }: { veraxSdk: any }) => {
+const Badges = ({ className }: { className?: string }) => {
+    // const [address, setAddress] = useState("0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83")
+    const { address, chainId, isConnected, chain } = useAccount();
+    const [attestations, setAttestations] = useState<Attestation[]>([]);
+    const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address);
 
     const issueAttestation = async () => {
+        console.log('issued')
+        // transactionHash = "0x3beaec19b94570367e944458a997c51804032da1b85c11c12ed7a0fef99b9cf4"   
+        if (!address) return;
+        const test = await veraxSdk.portal.findOneById(LINEA_SEPOLIA_PORTAL_ADDRESS);
+        const testSchema = await veraxSdk.schema.findOneById(LINEA_SEPOLIA_HEALTH10_BADGE);
+        console.log(test, testSchema);
         try {
             let receipt = await veraxSdk.portal.attest(
                 LINEA_SEPOLIA_PORTAL_ADDRESS,
                 {
-                    schemaId:
-                        '0x5dc8bc9158dd69ee8a234bb8f9ab1f4f17bb52c84b6fd4720d58ec82bb43d2f5', // todo use my schema
-                    expirationDate: Math.floor(Date.now() / 1000) + 2592000,
-                    subject: 0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83, //address,
-                    attestationData: [
-                        // {
-                        //     contract: ,
-                        //     balance,
-                        // },
-                    ],
+                    schemaId: LINEA_SEPOLIA_HEALTH10_BADGE,
+                    expirationDate: 1693583329,
+                    subject: address,
+                    // claimed_by: address
+                    attestationData: [{ badge_claimed: true }],
                 },
+                [],
             );
             console.log(receipt)
         } catch (e) {
@@ -59,22 +39,50 @@ const Badges = ({ veraxSdk }: { veraxSdk: any }) => {
                 if (e.message.includes('User rejected the request')) {
                     console.log('User denied transaction signature');
                 } else {
-                    console.log(`${DEFAULT_ERROR_MESSAGE} - ${e.message}`);
+                    console.log(` - ${e}`);
                 }
             } else {
-                console.log(DEFAULT_ERROR_MESSAGE);
+                console.log('unexpected');
             }
         }
+    };
 
-        useEffect(() => {
-            issueAttestation()
-        }, [])
-    }
+    const revealAttestations = async () => {
+        console.log('reveal')
+        try {
+            const attestationsList = await veraxSdk.attestation.findBy(1, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address });
+            setAttestations(attestationsList)
+            console.log(attestations);
+        } catch (e) {
+            console.log(`${e}`);
+        }
+    };
+
+    useEffect(() => {
+        if (address) {
+            revealAttestations();
+        }
+    }, [address]);
 
     return (
-        <Card className="bg-foreground-light">
-            <div className="flex gap-3">
-                {badgesData.map(badge => <BadgeCard badge={badge} key={badge.name} />)}
+        <Card className={clsx(className, "bg-foreground-light")}>
+            <Typography
+                className="mb-4"
+                size='heading5'
+            >
+                Badges:
+            </Typography>
+            <div className="flex flex-wrap gap-3">
+                {badgesData.map(badge => {
+                    const attested = !!attestations.filter(attestation => attestation.schema.id === badge.schema).length;
+                    return (
+                        <BadgeCard
+                            badge={badge}
+                            key={badge.name}
+                            onClick={issueAttestation}
+                            attested={attested}
+                        />)
+                })}
             </div>
         </Card>
     )

@@ -29,7 +29,7 @@ const Statistics = ({ className }: StatisticsProps) => {
     const totalDebt = (Number(formatUnits((data as bigint[])[1], etherUnits.gwei)) * 10).toFixed(2);
     const totalCollateralBase = (Number(formatUnits((data as bigint[])[0], etherUnits.gwei)) * 10).toFixed(2)
     const borrowData = [
-        { name: "Health score:", value: healthScore },
+        { name: "Health score:", value: healthScore, color: Number(healthScore) > 3 ? "text-accept" : "desctructive" },
         { name: "Total debt:", value: `${totalDebt}$` },
         { name: "Total collateral:", value: `${totalCollateralBase}$` },
     ]
@@ -41,13 +41,14 @@ const Statistics = ({ className }: StatisticsProps) => {
             <Typography
                 className="mb-4"
                 size='heading5'
-            >Wallet borrow data:
+            >
+                Wallet borrow data:
             </Typography>
             <div>
-                {borrowData.map(({ name, value }) => (
+                {borrowData.map(({ name, value, color }) => (
                     <div className="flex justify-between mb-1" key={name}>
                         <span>{name}</span>
-                        <span>{value}</span>
+                        <span className={color}>{value}</span>
                     </div>
                 ))}
             </div>

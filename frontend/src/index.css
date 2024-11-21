@@ -46,6 +46,8 @@ body {
   --destructive-hover: #dc2626;
   --destructive-active: #b91c1c;
 
+  --accept: rgb(76, 175, 80);
+
   --theme-primary: #b732f5;
   --theme-primary-text: #fff;
   --theme-primary-hover: #c55bf7;

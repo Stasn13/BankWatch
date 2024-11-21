@@ -1,16 +1,19 @@
-import { Card } from '../ui/Card';
+import { Card, CardHeader } from '../ui/Card';
 import { Button } from '../ui/Button';
 import clsx from 'clsx';
 
 import { Typography } from '../ui/Typography';
 import { CardComponentProps } from '../ui/Card/types';
+import { ReactNode } from 'react';
 
 type BannerProps = CardComponentProps & {
     text?: string
-    buttonText?: string
+    btnText?: string
+    btnClassName?: string
+    children?: ReactNode
 }
 
-const Banner = ({ className, wrapperClassName, bgImg, text, buttonText }: BannerProps) => {
+const Banner = ({ className, wrapperClassName, bgImg, text, btnText, children, btnClassName }: BannerProps) => {
 
     return (
         <Card
@@ -18,17 +21,20 @@ const Banner = ({ className, wrapperClassName, bgImg, text, buttonText }: Banner
             wrapperClassName={clsx(wrapperClassName, "overflow-hidden")}
             bgImg={bgImg}
         >
-            <Typography
-                size='heading5'
-            >
-                {text}
-            </Typography>
-            <Button
-                variant="primary"
-                className="absolute bottom-4 right-4"
-            >
-                {buttonText}
-            </Button>
+            <CardHeader>
+                <Typography
+                    size='heading5'
+                >
+                    {text}
+                </Typography>
+                <Button
+                    variant="primary"
+                    className={btnClassName}
+                >
+                    {btnText}
+                </Button>
+            </CardHeader>
+            {children}
         </Card>
     )
 }
