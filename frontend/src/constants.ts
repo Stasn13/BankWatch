@@ -3,11 +3,14 @@ import badge2 from './assets/64183.svg';
 import badge3 from './assets/66917.svg';
 import badge4 from './assets/66918.svg';
 
-export const LINEA_SEPOLIA_PORTAL_ADDRESS = "0xbcfdd269eb98bf839b6b098e11ed3121123c5752"; // 0xbcFDd269eb98bF839B6b098E11ed3121123c5752
+export const LINEA_SEPOLIA_PORTAL_ADDRESS = "0xbcfdd269eb98bf839b6b098e11ed3121123c5752";
+
 export const LINEA_SEPOLIA_HEALTH3_BADGE = "0x32649d42f5bfd50c099f6a5bc2ed2915cebb80cf8f2fd4de928c68f3ae5e0194";
 export const LINEA_SEPOLIA_HEALTH10_BADGE = "0x975af5e8ecbc17251efb69b10570e31528152820376d928ef95d6656c0d1732e";
 export const LINEA_SEPOLIA_COLLATERAL500_BADGE = "0x96a5d50b397785e50d3c4e100c3e29f60c8d2cbf2a33040444bd43dbc12ec36c";
 export const LINEA_SEPOLIA_COLLATERAL1000_BADGE = "0x98863b9b46a85ca7bcbb2e5bacd50485380affebf5a1e8785b9bad5191275b9b";
+
+export const LINEA_SEPOLIA_BANK_SCORE = "0x6b46b72dff4589958a45395d42366455a966477ca7a4f49267c000f2719e04ca";
 
 export const badgesData = [
     {
