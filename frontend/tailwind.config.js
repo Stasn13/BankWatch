@@ -142,6 +142,9 @@ export default {
           hover: 'var(--destructive-hover)',
           active: 'var(--destructive-active)',
         },
+        accept: {
+          DEFAULT: 'var(--accept)',
+        },
         muted: {
           DEFAULT: 'var(--muted)',
           text: 'var(--muted-text)',
