@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createConfig, WagmiProvider } from 'wagmi';
 
 export const walletConnectProjectId = 'd149fd0b3fe44636121032492ed688e2';
-const chains = [sepolia, lineaSepolia, mainnet] as const;
+const chains = [lineaSepolia, sepolia, mainnet] as const;
 export const wagmiConfig = createConfig(
   getDefaultConfig({
     chains,
