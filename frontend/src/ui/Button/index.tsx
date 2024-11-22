@@ -9,9 +9,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         type="button"
-        className={clsx(buttonVariants({ variant, size, className }))}
+        className={clsx(buttonVariants({ variant, size: isLoading ? "sm" : size, className }))}
         ref={ref}
         {...props}
+        disabled={isLoading}
       >
         {isLoading ? <WheelIcon className="animate-spin-loader" /> : props.children}
       </button>
