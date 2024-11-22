@@ -16,6 +16,18 @@ import { useState } from 'react'
 
 function App() {
   const [loading, setLoading] = useState(false);
+  /**
+   * TODO:
+   * - finish busines logic
+   * - implement loaders and error handling
+   * - improve layout, fix connectbtn
+   * - implement routing
+   * - add user guide
+   * - write docs/description
+   * - prepare release
+   * - write post in linkedIn
+   * - implement "Coming soon" feaatures
+   */
 
   return (
     <Web3Provider>
