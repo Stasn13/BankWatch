@@ -18,6 +18,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   /**
    * TODO:
+   * - connect score attestations
    * - finish busines logic
    * - implement loaders and error handling
    * - improve layout, fix connectbtn
@@ -26,6 +27,7 @@ function App() {
    * - write docs/description
    * - prepare release
    * - write post in linkedIn
+   * - add new badges
    * - implement "Coming soon" feaatures
    */
 
