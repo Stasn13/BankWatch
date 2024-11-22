@@ -11,8 +11,11 @@ import { Typography } from './ui/Typography'
 import { VeraxSdk } from '@verax-attestation-registry/verax-sdk'
 import { useAccount } from 'wagmi'
 import { ConnectKitButton } from 'connectkit'
+import ScoreBanner from './components/ScoreBanner'
+import { useState } from 'react'
 
 function App() {
+  const [loading, setLoading] = useState(false);
 
   return (
     <Web3Provider>
@@ -66,31 +69,9 @@ function App() {
             text="Mint your Bank score Attestation"
             btnText="Claim"
             bgImg={bg1}
+            btnProps={{isLoading: loading, onClick: () => setLoading(!loading)}}
           >
-            <div className="flex justify-between">
-              <div className="flex items-baseline">
-                <span className="mr-2">
-                  You have scored previously:
-                </span>
-                <Typography
-                  className="!font-black text-accept" // todo: apply different colors
-                  variant="heading2"
-                >
-                  34
-                </Typography>
-              </div>
-              <div className="flex items-baseline">
-                <span className="mr-2">
-                  You are eligible to claim
-                </span>
-                <Typography
-                  className="!font-black text-accept" // todo: apply different colors
-                  variant="heading2"
-                >
-                  48
-                </Typography>
-              </div>
-            </div>
+            <ScoreBanner />
           </Banner>
           <Card className="bg-foreground-light" wrapperClassName="w-full">
             (comming soon)

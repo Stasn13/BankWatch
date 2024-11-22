@@ -5,15 +5,17 @@ import clsx from 'clsx';
 import { Typography } from '../ui/Typography';
 import { CardComponentProps } from '../ui/Card/types';
 import { ReactNode } from 'react';
+import { ButtonProps } from '../ui/Button/types';
 
 type BannerProps = CardComponentProps & {
     text?: string
     btnText?: string
     btnClassName?: string
     children?: ReactNode
+    btnProps?: ButtonProps
 }
 
-const Banner = ({ className, wrapperClassName, bgImg, text, btnText, children, btnClassName }: BannerProps) => {
+const Banner = ({ className, wrapperClassName, bgImg, text, btnText, children, btnClassName, btnProps }: BannerProps) => {
 
     return (
         <Card
@@ -29,7 +31,8 @@ const Banner = ({ className, wrapperClassName, bgImg, text, btnText, children, b
                 </Typography>
                 <Button
                     variant="primary"
-                    className={btnClassName}
+                    className={btnClassName} 
+                    {...btnProps}
                 >
                     {btnText}
                 </Button>
