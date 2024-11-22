@@ -5,6 +5,9 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        'spin-loader': 'spin 1200ms linear infinite',
+      },
       colors: {
         'ui-accent': {
           400: 'rgb(var(--ui-accent-400))',

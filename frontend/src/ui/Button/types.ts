@@ -2,12 +2,12 @@ import { ButtonHTMLAttributes } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
 export const buttonVariants = cva(
-  'flex flex-row items-center justify-center gap-2 rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-[0.37]',
+  'flex flex-row items-center justify-center gap-2 rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-[0.37] transition duration-200',
   {
     variants: {
       variant: {
         primary:
-          'bg-primary text-white hover:bg-primary-hover active:bg-ui-accent-600',
+          'bg-primary text-white hover:bg-primary-hover active:bg-primary-active',
         secondary:
           'bg-primary text-primary-text hover:bg-primary-hover active:bg-primary-active',
         tertiary:
@@ -44,4 +44,4 @@ export const buttonVariants = cva(
 
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof buttonVariants> {isLoading?: boolean}
