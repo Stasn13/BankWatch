@@ -30,7 +30,7 @@ body {
   --primary: rgb(105, 105, 255);
   --primary-text: #fafafa;
   --primary-hover: rgb(126, 126, 255);
-  --primary-active: #404040;
+  --primary-active: rgb(98, 98, 211);
   --primary-focus: #404040;
   --primary-logo: #b732f5;
   --primary-badge: #525252;
