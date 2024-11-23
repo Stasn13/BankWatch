@@ -7,7 +7,7 @@ import { Web3Provider } from '../web3provider'
 export const Route = createRootRoute({
     component: () => (
         <Web3Provider>
-            <div className="absolute right-8 top-4 z-100">
+            <div className="absolute right-8 top-4 z-20">
                 <ConnectKitButton />
             </div>
             <div className="flex px-4 h-[100vh] overflow-hidden">
