@@ -16,7 +16,7 @@ function Main() {
   /**
    * TODO:
    * - connect score attestations
-   * - finish busines logic
+   * - finish busines logic getting attestattions
    * - implement loaders and error handling
    * - implement routing and build other pages
    * - add user guide and onboarding dasboard
