@@ -19,7 +19,6 @@ export const badgesData = [
         img: badge1,
         schema: LINEA_SEPOLIA_HEALTH3_BADGE,
         badgeName: "health3_claimed_by",
-        args: () => {}
     },
     {
         name: "Health Champion",
