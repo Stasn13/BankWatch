@@ -18,7 +18,6 @@ function Main() {
    * - connect score attestations
    * - finish busines logic
    * - implement loaders and error handling
-   * - improve layout, fix connectbtn
    * - implement routing and build other pages
    * - add user guide
    * - write docs/description
@@ -26,6 +25,9 @@ function Main() {
    * - write post in linkedIn
    * - add new badges, enhance svg's
    * - implement "Coming soon" feaatures
+   * 
+   * Done:
+   * - improve layout, fix connectbtn
    */
 
   return (
