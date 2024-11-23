@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk';
 import { Typography } from '../ui/Typography';
 import clsx from 'clsx';
-import Toast from '../ui/Toast';
+import { waitForTransactionReceipt } from 'viem/actions';
+import { wagmiConfig } from '../web3provider';
 
 const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSdk }) => {
     // const [address, setAddress] = useState("0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83")
@@ -19,7 +20,6 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
     const issueAttestation = async (schemaId: string, badgeName: string) => {
         if (!address) return;
         setIssueLoading(badgeName);
-        console.log({ badge_claimed: true, [badgeName]: address })
         try {
             let receipt = await veraxSdk.portal.attest(
                 LINEA_SEPOLIA_PORTAL_ADDRESS,
@@ -31,7 +31,13 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
                 },
                 [],
             );
-            console.log(receipt)
+            if (receipt.transactionHash) {
+                receipt = await waitForTransactionReceipt(wagmiConfig.getClient(), {
+                  hash: receipt.transactionHash,
+                });
+              } else {
+                console.log("Error during receipt");
+              }
         } catch (e) {
             console.error(e);
             if (e instanceof Error) {
@@ -45,6 +51,7 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
             }
         } finally {
             setIssueLoading(false);
+            revealAttestations();
         }
     };
 
@@ -53,6 +60,7 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
         try {
             const attestationsList = await veraxSdk.attestation.findBy(500, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address });
             setAttestations(attestationsList)
+            console.log(attestationsList);
         } catch (e) {
             console.log(`${e}`);
         } finally {
@@ -76,14 +84,14 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
             </Typography>
             <div className="flex flex-wrap gap-3">
                 {badgesData.map(badge => {
-                    const attested = !!attestations.filter(attestation => attestation.schema.id === badge.schema).length;
-                    console.log(attestations);
+                    const attested = !!attestations.filter(attestation => (attestation.schema.id === badge.schema && attestation.decodedPayload[0].badge_claimed)).length;
                     return (
                         <BadgeCard
                             badge={badge}
                             key={badge.name}
                             onClick={() => issueAttestation(badge.schema, badge.badgeName)}
                             attested={attested}
+                            // attested={false} // to check conditions
                             loading={revealLoading || (issueLoading === badge.badgeName)}
                         />)
                 })}
