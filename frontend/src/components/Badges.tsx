@@ -11,24 +11,22 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
     // const [address, setAddress] = useState("0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83")
     const { address, chainId, isConnected, chain } = useAccount();
     const [attestations, setAttestations] = useState<Attestation[]>([]);
+    const [issueLoading, setIssueLoading] = useState(false);
+    const [revealLoading, setRevealLoading] = useState(false);
     
 
-    const issueAttestation = async () => {
-        console.log('issued')
-        // transactionHash = "0x3beaec19b94570367e944458a997c51804032da1b85c11c12ed7a0fef99b9cf4"   
+    const issueAttestation = async (schemaId: string) => {
         if (!address) return;
-        const test = await veraxSdk.portal.findOneById(LINEA_SEPOLIA_PORTAL_ADDRESS);
-        const testSchema = await veraxSdk.schema.findOneById(LINEA_SEPOLIA_HEALTH10_BADGE);
-        console.log(test, testSchema);
+        setIssueLoading(true);
         try {
             let receipt = await veraxSdk.portal.attest(
                 LINEA_SEPOLIA_PORTAL_ADDRESS,
                 {
-                    schemaId: LINEA_SEPOLIA_HEALTH10_BADGE,
+                    schemaId,
                     expirationDate: 1756741729,
                     subject: address,
                     // claimed_by: address
-                    attestationData: [{ badge_claimed: true }],
+                    attestationData: [{ badge_claimed: true }], // todo: check args
                 },
                 [],
             );
@@ -44,15 +42,20 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
             } else {
                 console.log('unexpected');
             }
+        } finally {
+            setIssueLoading(false);
         }
     };
 
     const revealAttestations = async () => {
+        setRevealLoading(true);
         try {
             const attestationsList = await veraxSdk.attestation.findBy(1, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address });
             setAttestations(attestationsList)
         } catch (e) {
             console.log(`${e}`);
+        } finally {
+            setRevealLoading(false);
         }
     };
 
@@ -77,8 +80,9 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
                         <BadgeCard
                             badge={badge}
                             key={badge.name}
-                            onClick={issueAttestation}
+                            onClick={() => issueAttestation(badge.schema)}
                             attested={attested}
+                            loading={revealLoading || issueLoading}
                         />)
                 })}
             </div>

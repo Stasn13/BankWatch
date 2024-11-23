@@ -6,7 +6,7 @@ import { Card } from "../Card"
 import { Typography } from "../Typography";
 
 
-const BadgeCard = ({ badge, onClick, attested }: { badge: typeof badgesData[0], onClick: () => void, attested: boolean }) => {
+const BadgeCard = ({ badge, onClick, attested, loading }: { badge: typeof badgesData[0], onClick: () => void, attested: boolean, loading: boolean }) => {
     const { img, name, description } = badge
 
     return (
@@ -36,6 +36,7 @@ const BadgeCard = ({ badge, onClick, attested }: { badge: typeof badgesData[0], 
                 variant={attested ? "ghost" : "outline"}
                 disabled={attested}
                 onClick={onClick}
+                isLoading={loading}
             >
                 {attested ? "Attested" : "Mint"}
             </Button>
