@@ -19,7 +19,7 @@ function Main() {
    * - finish busines logic
    * - implement loaders and error handling
    * - implement routing and build other pages
-   * - add user guide
+   * - add user guide and onboarding dasboard
    * - write docs/description
    * - prepare release
    * - write post in linkedIn
