@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Typography } from '../ui/Typography';
 import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk';
 import Banner from './Banner';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import bg1 from "../assets/img/purple-gradient.png";
 import { LINEA_SEPOLIA_BANK_SCORE, LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants';
 
@@ -16,12 +16,12 @@ const ScoreBanner = ({ className, veraxSdk, address }: ScoreBannerProps) => {
     const [loading, setLoading] = useState(false);
     const [revealLoading, setRevealLoading] = useState(false);
     const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
-    const recentScore = scoreAttestations?.[0]?.decodedPayload?.[0].bank_score ?? undefined;
+    const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]); // todo check re-renders
     const currentScore = Math.floor(Math.random() * 100) + 1; // Todo: improve score based on values
 
     const revealScoreAttestations = async () => {
         try {
-            const scoresList = await veraxSdk.attestation.findBy(1, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address, schema: LINEA_SEPOLIA_BANK_SCORE });
+            const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address, schema: LINEA_SEPOLIA_BANK_SCORE });
             setScoreAttestations(scoresList)
             console.log(scoresList);
         } catch (e) {
