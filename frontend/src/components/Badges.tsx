@@ -7,11 +7,11 @@ import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk';
 import { Typography } from '../ui/Typography';
 import clsx from 'clsx';
 
-const Badges = ({ className }: { className?: string }) => {
+const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSdk }) => {
     // const [address, setAddress] = useState("0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83")
     const { address, chainId, isConnected, chain } = useAccount();
     const [attestations, setAttestations] = useState<Attestation[]>([]);
-    const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address);
+    
 
     const issueAttestation = async () => {
         console.log('issued')
@@ -25,7 +25,7 @@ const Badges = ({ className }: { className?: string }) => {
                 LINEA_SEPOLIA_PORTAL_ADDRESS,
                 {
                     schemaId: LINEA_SEPOLIA_HEALTH10_BADGE,
-                    expirationDate: 1693583329,
+                    expirationDate: 1756741729,
                     subject: address,
                     // claimed_by: address
                     attestationData: [{ badge_claimed: true }],
@@ -48,11 +48,9 @@ const Badges = ({ className }: { className?: string }) => {
     };
 
     const revealAttestations = async () => {
-        console.log('reveal')
         try {
             const attestationsList = await veraxSdk.attestation.findBy(1, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address });
             setAttestations(attestationsList)
-            console.log(attestations);
         } catch (e) {
             console.log(`${e}`);
         }
