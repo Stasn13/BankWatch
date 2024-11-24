@@ -4,28 +4,40 @@ import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk';
 import Banner from './Banner';
 import { useEffect, useMemo, useState } from 'react';
 import bg1 from "../assets/img/purple-gradient.png";
-import { LINEA_SEPOLIA_BANK_SCORE, LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants';
+import { LINEA_SEPOLIA_BANK_SCORE, LINEA_SEPOLIA_PORTAL_ADDRESS, UserStatistics } from '../constants';
+import { calculateScore } from '../utils/calculateScore';
+import { wagmiConfig } from '../web3provider';
+import { waitForTransactionReceipt } from 'viem/actions';
 
 type ScoreBannerProps = {
     className?: string
     veraxSdk: VeraxSdk
     address?: `0x${string}`
+    userStatistics: UserStatistics
 }
 
-const ScoreBanner = ({ className, veraxSdk, address }: ScoreBannerProps) => {
+const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBannerProps) => {
     const [loading, setLoading] = useState(false);
     const [revealLoading, setRevealLoading] = useState(false);
     const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
     const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]); // todo check re-renders
-    const currentScore = Math.floor(Math.random() * 100) + 1; // Todo: improve score based on values
+    const currentScore = useMemo(() => {
+        if (!userStatistics) return 0;
+        const { healthScore, totalCollateralBase, totalDebt } = userStatistics;
+        return calculateScore(Number(healthScore), Number(totalCollateralBase), Number(totalDebt));
 
+    }, [userStatistics?.healthScore, userStatistics?.totalCollateralBase, userStatistics?.totalDebt]);
+    console.log(currentScore)
     const revealScoreAttestations = async () => {
+        setRevealLoading(true)
         try {
             const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address, schema: LINEA_SEPOLIA_BANK_SCORE });
             setScoreAttestations(scoresList)
             console.log(scoresList);
         } catch (e) {
             console.log(`${e}`);
+        } finally {
+            setRevealLoading(false)
         }
     };
 
@@ -49,7 +61,14 @@ const ScoreBanner = ({ className, veraxSdk, address }: ScoreBannerProps) => {
                 },
                 [],
             );
-            console.log(receipt)
+            setRevealLoading(true);
+            if (receipt.transactionHash) {
+                receipt = await waitForTransactionReceipt(wagmiConfig.getClient(), {
+                    hash: receipt.transactionHash,
+                });
+            } else {
+                console.log("Error during receipt");
+            }
         } catch (e) {
             console.error(e);
             if (e instanceof Error) {
@@ -77,7 +96,10 @@ const ScoreBanner = ({ className, veraxSdk, address }: ScoreBannerProps) => {
         >
             <div className={clsx(className, "flex justify-between")}>
                 <div className="flex items-baseline">
-                    {recentScore &&
+                    {revealLoading ? (
+                        <div className="animate-pulse bg-foreground-light text-foreground-light rounded-xl w-[210px] h-[36px]" />)
+                        :
+                        recentScore &&
                         <>
                             <span className="mr-2">
                                 You have scored previously:
@@ -88,7 +110,9 @@ const ScoreBanner = ({ className, veraxSdk, address }: ScoreBannerProps) => {
                             >
                                 {recentScore}
                             </Typography>
-                        </>}
+                        </>
+                    }
+                    { }
                 </div>
                 <div className="flex items-baseline">
                     <span className="mr-2">

@@ -1,7 +1,7 @@
 import { Card } from '../ui/Card';
 import BadgeCard from '../ui/BadgeCard';
-import { useAccount, useReadContract } from 'wagmi';
-import { badgesData, LINEA_SEPOLIA_HEALTH10_BADGE, LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants';
+import { useAccount } from 'wagmi';
+import { badgesData, LINEA_SEPOLIA_PORTAL_ADDRESS, UserStatistics } from '../constants';
 import { useEffect, useState } from 'react';
 import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk';
 import { Typography } from '../ui/Typography';
@@ -9,9 +9,14 @@ import clsx from 'clsx';
 import { waitForTransactionReceipt } from 'viem/actions';
 import { wagmiConfig } from '../web3provider';
 
-const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSdk }) => {
-    // const [address, setAddress] = useState("0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83")
-    const { address, chainId, isConnected, chain } = useAccount();
+type BadgesProps = {
+    className?: string
+    veraxSdk: VeraxSdk
+    userStatistics: UserStatistics
+}
+
+const Badges = ({ className, veraxSdk, userStatistics }: BadgesProps) => {
+    const { address } = useAccount();
     const [attestations, setAttestations] = useState<Attestation[]>([]);
     const [issueLoading, setIssueLoading] = useState<string | boolean>(false);
     const [revealLoading, setRevealLoading] = useState(false);
@@ -33,11 +38,11 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
             );
             if (receipt.transactionHash) {
                 receipt = await waitForTransactionReceipt(wagmiConfig.getClient(), {
-                  hash: receipt.transactionHash,
+                    hash: receipt.transactionHash,
                 });
-              } else {
+            } else {
                 console.log("Error during receipt");
-              }
+            }
         } catch (e) {
             console.error(e);
             if (e instanceof Error) {
@@ -91,8 +96,9 @@ const Badges = ({ className, veraxSdk }: { className?: string, veraxSdk: VeraxSd
                             key={badge.name}
                             onClick={() => issueAttestation(badge.schema, badge.badgeName)}
                             attested={attested}
-                            // attested={false} // to check conditions
-                            loading={revealLoading || (issueLoading === badge.badgeName)}
+                            disabled={!attested && !badge.eligible(userStatistics)}
+                            // attested={false} // to test conditions
+                            loading={revealLoading || (issueLoading === badge.badgeName)} // todo implement reveal laoding as skeleton
                         />)
                 })}
             </div>
