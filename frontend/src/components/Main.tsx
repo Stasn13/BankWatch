@@ -1,22 +1,15 @@
-import Statistics from './Statistics'
-import { Card } from '../ui/Card'
-import Badges from './Badges'
-import Banner from './Banner'
 
-import bg2 from "../assets/img/bg2.png";
+
 import Navigation from './Navigation'
-import { Typography } from '../ui/Typography'
 import { VeraxSdk } from '@verax-attestation-registry/verax-sdk'
 import { useAccount } from 'wagmi'
-import ScoreBanner from './ScoreBanner'
 
 function Main() {
   const { address, chainId, isConnected, chain } = useAccount();
   const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address);
   /**
    * TODO:
-   * - connect score attestations
-   * - finish busines logic getting attestattions
+   * - check other wallets (null states, empty components, users not attended to zeroLend)
    * - implement loaders and error handling
    * - implement routing and build other pages
    * - add user guide and onboarding dasboard
@@ -28,6 +21,8 @@ function Main() {
    * 
    * Done:
    * - improve layout, fix connectbtn
+   * - connect score attestations
+   * - finish busines logic getting attestattions
    */
 
   return (
