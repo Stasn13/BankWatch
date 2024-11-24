@@ -8,8 +8,10 @@ function Main() {
   const { address, chainId, isConnected, chain } = useAccount();
   const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address);
   /**
+   * BACKLOG
    * TODO:
    * - check other wallets (null states, empty components, users not attended to zeroLend)
+   * - improve reveal on badges
    * - implement loaders and error handling
    * - implement routing and build other pages
    * - add user guide and onboarding dasboard
