@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
 import Badges from '../components/Badges'
 import Banner from '../components/Banner'
 import ScoreBanner from '../components/ScoreBanner'
@@ -18,7 +18,8 @@ export const Route = createLazyFileRoute('/dashboard')({
 })
 
 function Dashboard() {
-    const { address, chainId, isConnected, chain } = useAccount();
+    const { address } = useAccount();
+    const navigate = useNavigate();
     const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address);
     if (!address) return
     const { data, isLoading } = useReadContract({
@@ -73,6 +74,9 @@ function Dashboard() {
                 bgImg={bg2}
                 text="Now you can observe other wallets eligibility"
                 btnText="Discover"
+                btnProps={{
+                    onClick: () => navigate({ to: '/discover', search: { address: '0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83' } })
+                }}
                 btnClassName="absolute bottom-4 right-4"
             />
             <Card className="bg-foreground-light" wrapperClassName="w-full">
