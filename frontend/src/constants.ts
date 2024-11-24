@@ -11,6 +11,11 @@ export const LINEA_SEPOLIA_COLLATERAL500_BADGE = "0xb722ce9b358f53a06126b7053c9e
 export const LINEA_SEPOLIA_COLLATERAL1000_BADGE = "0x8c84aae5181fd0a1a2440de031b5fd9f0eb833aa0398f23c9722f10561ebb08e";
 
 export const LINEA_SEPOLIA_BANK_SCORE = "0x6b46b72dff4589958a45395d42366455a966477ca7a4f49267c000f2719e04ca";
+export type UserStatistics = {
+    healthScore: string
+    totalDebt: string
+    totalCollateralBase: string
+}
 
 export const badgesData = [
     {
@@ -19,26 +24,42 @@ export const badgesData = [
         img: badge1,
         schema: LINEA_SEPOLIA_HEALTH3_BADGE,
         badgeName: "health3_claimed_by",
+        criteriaName: "healthScore",
+        eligible: function (statistics: UserStatistics) {
+            return Number(statistics[this.criteriaName as keyof UserStatistics]) > 3
+        }
     },
     {
         name: "Health Champion",
         description: "Verified as having a Health score > 10, determine the strong strong financial responsibility",
         img: badge2,
         badgeName: "health10_claimed_by",
-        schema: LINEA_SEPOLIA_HEALTH10_BADGE
+        schema: LINEA_SEPOLIA_HEALTH10_BADGE,
+        criteriaName: "healthScore",
+        eligible: function (statistics: UserStatistics) {
+            return Number(statistics[this.criteriaName as keyof UserStatistics]) > 10
+        }
     },
     {
         name: "Collateral Verified",
         description: "This badge verifies the user has Collateral base over 500$, ensuring strong financial backing",
         img: badge3,
         badgeName: "collateral500_claimed_by",
-        schema: LINEA_SEPOLIA_COLLATERAL500_BADGE
+        schema: LINEA_SEPOLIA_COLLATERAL500_BADGE,
+        criteriaName: "totalCollateralBase",
+        eligible: function (statistics: UserStatistics) {
+            return Number(statistics[this.criteriaName as keyof UserStatistics]) > 500
+        }
     },
     {
         name: "Secured Lender",
         description: "This badge highlights Collateral base > 1000$, reflecting the user’s significant collateral base, ensuring credibility and trustworthiness in financial",
         img: badge4,
         badgeName: "collateral1000_claimed_by",
-        schema: LINEA_SEPOLIA_COLLATERAL1000_BADGE
+        schema: LINEA_SEPOLIA_COLLATERAL1000_BADGE,
+        criteriaName: "totalCollateralBase",
+        eligible: function (statistics: UserStatistics): boolean {
+            return Number(statistics[this.criteriaName as keyof UserStatistics]) > 1000
+        }
     }
 ]
