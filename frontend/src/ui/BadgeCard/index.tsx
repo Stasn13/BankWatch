@@ -6,13 +6,13 @@ import { Card } from "../Card"
 import { Typography } from "../Typography";
 
 
-const BadgeCard = ({ badge, onClick, attested, loading }: { badge: typeof badgesData[0], onClick: () => void, attested: boolean, loading: boolean }) => {
+const BadgeCard = ({ className, badge, onClick, attested, loading, disabled }: { className?: string, badge: typeof badgesData[0], onClick: () => void, attested: boolean, loading: boolean, disabled?: boolean }) => {
     const { img, name, description } = badge
 
     return (
         <Card
-            className="bg-black pb-8"
-            wrapperClassName="min-w-[220px] basis-1/4 relative"
+            className="bg-black" // pb-8
+            wrapperClassName={clsx(className, disabled && "opacity-30", "min-w-[220px] basis-1/4 relative")}
         >
             <Typography
                 component="p"
@@ -30,16 +30,18 @@ const BadgeCard = ({ badge, onClick, attested, loading }: { badge: typeof badges
             >
                 {description}
             </Typography>
-            <Button
-                className={clsx(attested && "disabled:opacity-100 px-0", "ml-auto")}
-                size="sm"
-                variant={attested ? "ghost" : "outline"}
-                disabled={attested}
-                onClick={onClick}
-                isLoading={loading}
-            >
-                {attested ? "Attested" : "Mint"}
-            </Button>
+            {!disabled &&
+                <Button
+                    className={clsx(attested && "disabled:opacity-100 px-0", "ml-auto")}
+                    size="sm"
+                    variant={attested ? "ghost" : "outline"}
+                    disabled={attested}
+                    onClick={onClick}
+                    isLoading={loading}
+                >
+                    {attested ? "Attested" : "Mint"}
+                </Button>
+            }
             <CheckIcon
                 size={28}
                 className="absolute top-2 right-2"
