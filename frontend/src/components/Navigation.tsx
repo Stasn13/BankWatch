@@ -20,7 +20,7 @@ const Navigation = () => {
             </Link>
             <Link
                 to="/discover"
-                // params={{ somewhereId: 'baz' }}
+                search={{ address: '0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83' }}
                 className="[&.active]:border-white rounded-lg border border-transparent transition"
             >
                 <SearchIcon className="rounded-lg p-2" />
