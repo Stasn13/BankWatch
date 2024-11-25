@@ -5,6 +5,7 @@ import { Card } from '../ui/Card'
 import Badges from '../components/Badges'
 import BadgeCard from '../ui/BadgeCard'
 import { badgesData } from '../constants'
+import Transactions from '../components/Transcations'
 
 export const Route = createLazyFileRoute('/discover')({
     component: Discover,
@@ -41,5 +42,6 @@ function Discover() {
                 throw new Error('Function not implemented.')
             }} attested={false} loading={false} />
         </Card>
+        <Transactions />
     </>
 }

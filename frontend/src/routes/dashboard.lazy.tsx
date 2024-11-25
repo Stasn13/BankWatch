@@ -12,6 +12,7 @@ import bg2 from "../assets/img/bg2.png";
 import { abi } from '../abi/aave-contract';
 import { sepolia } from 'wagmi/chains';
 import { formatUnits, etherUnits } from 'viem';
+import Transactions from '../components/Transcations'
 
 export const Route = createLazyFileRoute('/dashboard')({
     component: Dashboard,
@@ -79,25 +80,7 @@ function Dashboard() {
                 }}
                 btnClassName="absolute bottom-4 right-4"
             />
-            <Card className="bg-foreground-light" wrapperClassName="w-full">
-                (comming soon)
-                <section className="mb-8">Historical data of user lend/borrow interaction with calculating of Health Rate</section>
-                {/* {
-  repays(where:{user: "0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83"}, orderBy: blockTimestamp, orderDirection: desc) {
-    user
-    amount
-    blockTimestamp
-    reserve
-  }
-  borrows(where:{user: "0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83"}) {
-    id
-    reserve
-    user
-    onBehalfOf
-    amount
-  }
-} */}
-            </Card>
+            <Transactions />
             <ScoreBanner
                 veraxSdk={veraxSdk}
                 address={address}
