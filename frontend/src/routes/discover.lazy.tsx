@@ -6,34 +6,41 @@ import Badges from '../components/Badges'
 import BadgeCard from '../ui/BadgeCard'
 import { badgesData } from '../constants'
 import Transactions from '../components/Transcations'
+import { Input } from '../ui/Input'
+import { useState } from 'react'
+import { Button } from '../ui/Button'
 
 export const Route = createLazyFileRoute('/discover')({
     component: Discover,
 })
 
 function Discover() {
-    const { address } = Route.useSearch()
+    const { address } = Route.useSearch();
+    const [searchAddress, setSearchAddress] = useState(address)
 
-    return <>
+    return <div className="flex flex-wrap gap-2">
         <Card
             className="bg-foreground-light"
-            wrapperClassName="mb-2"
+            wrapperClassName="mr-[100%] w-[fit-content]"
         >
             <Typography
                 size="heading1"
                 variant="heading1"
-                className="font-black mb-2"
+                className="font-black"
             >
                 Discover
             </Typography>
-            <Typography
-                size="heading3"
-                variant="heading1"
-                className="font-black"
-            >
-                {address}
-            </Typography>
         </Card>
+        <div className="mr-[100%] flex gap-4">
+            <Input
+                className="min-w-[380px]"
+                inputClassName="text-[12px]"
+                type="search"
+                value={searchAddress}
+                onChange={setSearchAddress}
+            />
+            <Button>Check</Button>
+        </div>
         <Card
             className="bg-foreground-light"
             wrapperClassName="mb-2"
@@ -43,5 +50,5 @@ function Discover() {
             }} attested={false} loading={false} />
         </Card>
         <Transactions />
-    </>
+    </div>
 }
