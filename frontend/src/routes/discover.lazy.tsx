@@ -106,7 +106,7 @@ function Discover() {
         />
         <Card
             className="bg-foreground-light flex flex-col"
-            wrapperClassName="mb-2 w-full"
+            wrapperClassName="w-full"
         >
             <Typography
                 className="mb-4"
