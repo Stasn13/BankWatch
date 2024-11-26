@@ -7,7 +7,7 @@ import {
 } from './types';
 import clsx from 'clsx';
 import { XIcon } from '../../assets/icons/X';
-import { SearchLightIcon } from '../../assets/icons/Search';
+import { SearchLightIcon } from '../../assets/icons/SearchLight';
 
 const InputField = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -83,14 +83,14 @@ const InputSearch = forwardRef<HTMLInputElement, InputSearchProps>(
         value={value}
         start={
           <SearchLightIcon
-            className="mr-2 h-[18px] w-[18px]"
+            className="mr-2 h-[18px] w-[18px] text-black"
           />
         }
         end={
           value ? (
             <XIcon
-              className="ml-2 h-[18px] w-[18px]"
-              onClick={onClear}
+              className="ml-2 h-[18px] w-[18px] text-black"
+              onClick={onClear as unknown as React.MouseEventHandler<SVGSVGElement>}
             />
           ) : null
         }

@@ -6,17 +6,17 @@ import { Card } from "../Card"
 import { Typography } from "../Typography";
 
 
-const BadgeCard = ({ className, badge, onClick, attested, loading, disabled }: { className?: string, badge: typeof badgesData[0], onClick: () => void, attested: boolean, loading: boolean, disabled?: boolean }) => {
+const BadgeCard = ({ className, badge, onClick, attested, loading, disabled, showOnly }: { className?: string, badge: typeof badgesData[0], onClick: () => void, attested: boolean, loading: boolean, disabled?: boolean, showOnly?: boolean }) => {
     const { img, name, description } = badge
 
     return (
         <Card
             className="bg-black" // pb-8
-            wrapperClassName={clsx(className, disabled && "opacity-30", "min-w-[220px] basis-1/4 relative")}
+            wrapperClassName={clsx(className, disabled && "opacity-30", "min-w-[220px] md:basis-[calc(33.33333%-0.75rem)] lg:basis-[calc(25%-0.75rem)] relative")}
         >
             <Typography
                 component="p"
-                className="text-primary-text text-left mb-2"
+                className={clsx(showOnly && "text-[12px]", "text-primary-text text-left mb-2")}
             >
                 {name}
             </Typography>
@@ -24,12 +24,16 @@ const BadgeCard = ({ className, badge, onClick, attested, loading, disabled }: {
                 style={{
                     background: "linear-gradient(217deg, #000, rgba(255,0,0,0) 70.71%), linear-gradient(138deg, #000000, rgba(0,255,0,0) 70.71%), linear-gradient(319deg, #434343, rgba(0,0,255,0) 90.71%)"
                 }} />
-            <Typography
-                size="body3"
-                className="text-secondary-text text-left mb-2"
-            >
-                {description}
-            </Typography>
+            {!showOnly && (
+                <>
+                    <Typography
+                        size="body3"
+                        className="text-secondary-text text-left mb-2"
+                    >
+                        {description}
+                    </Typography>
+                </>
+            )}
             {!disabled &&
                 <Button
                     className={clsx(attested && "disabled:opacity-100 px-0", "ml-auto")}
