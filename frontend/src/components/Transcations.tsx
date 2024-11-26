@@ -20,7 +20,7 @@ const Transactions = ({ className, wrapperClassName, bgImg, text, btnText, child
     return (
         <Card
             className={clsx(className, "bg-foreground-light text-left")}
-            wrapperClassName={clsx(wrapperClassName, "overflow-hidden w-full relative")}
+            wrapperClassName={clsx(wrapperClassName, "overflow-hidden w-full relative h-[120px]")}
         >
             <Typography
                 className="mb-4"

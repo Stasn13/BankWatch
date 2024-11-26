@@ -86,9 +86,15 @@ function Dashboard() {
                 address={address}
                 userStatistics={userStatistics}
             />
-            <Card className="bg-foreground-light" wrapperClassName="w-full">
-                (comming soon)
-                <section className="mt-8 w-full">APY of various tokens through some lend/borrow protocols (aave, ...)</section>
+            <Card className="bg-foreground-light" wrapperClassName="w-full relative h-[120px]">
+                <Typography
+                    className="mb-4"
+                    size='heading5'
+                >
+                    APY of various tokens through some lend/borrow protocols (aave, ...)
+                </Typography>
+
+                <Typography className="rounded-xl border px-2 absolute top-3 right-3 font-black">Coming soon ...</Typography>
             </Card>
         </>
     )
