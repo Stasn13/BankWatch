@@ -10,9 +10,10 @@ type StatisticsProps = {
         value: string;
         color?: string;
     }[]
+    isLoading?: boolean
 }
 
-const Statistics = ({ className, borrowData }: StatisticsProps) => {
+const Statistics = ({ className, borrowData, isLoading }: StatisticsProps) => {
 
     return (
         <Card className={clsx(className, "bg-foreground-light text-left")}>
@@ -26,7 +27,11 @@ const Statistics = ({ className, borrowData }: StatisticsProps) => {
                 {borrowData.map(({ name, value, color }) => (
                     <div className="flex justify-between mb-1" key={name}>
                         <span>{name}</span>
-                        <span className={color}>{value}</span>
+                        {isLoading ?
+                            <div className="animate-pulse bg-foreground-light text-foreground-light rounded-xl w-[80px] h-[24px]" />
+                            :
+                            <span className={color}>{value}</span>
+                        }
                     </div>
                 ))}
             </div>
