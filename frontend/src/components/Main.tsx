@@ -10,6 +10,7 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
+   * - improve search logic
    * - add skeleton and empty state for badges loader
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
