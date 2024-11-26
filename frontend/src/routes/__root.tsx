@@ -12,7 +12,10 @@ export const Route = createRootRoute({
             </div>
             <div className="flex px-4 h-[100vh] overflow-hidden">
                 <Navigation />
-                <main className="flex flex-row gap-2 flex-wrap px-8 overflow-y-auto pt-4">
+                <main
+                    className="w-full px-8 overflow-y-auto pt-4"
+                // flex flex-row gap-2 flex-wrap
+                >
                     <Outlet />
                     <TanStackRouterDevtools />
                 </main>

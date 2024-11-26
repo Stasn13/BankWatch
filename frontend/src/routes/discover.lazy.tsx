@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute, sear, useNavigate } from '@tanstack/react-router'
 import { Typography } from '../ui/Typography'
 import { Card } from '../ui/Card'
 import Badges from '../components/Badges'
@@ -16,13 +16,19 @@ import { useReadContract } from 'wagmi';
 import { sepolia } from 'viem/chains'
 import { formatUnits, etherUnits } from 'viem';
 
+type DiscoverSearch = {
+    address: number
+}
+
 export const Route = createLazyFileRoute('/discover')({
     component: Discover,
 })
 
 function Discover() {
     const { address } = Route.useSearch();
+    const navigate = useNavigate();
     const [searchAddress, setSearchAddress] = useState(address);
+    const [requestAddress, setRequestAddress] = useState(address);
     const [revealLoading, setRevealLoading] = useState(false);
     const [badgesAttestations, setBadgesAttestations] = useState<typeof badgesData>([]);
     const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address); // Todo find the way to instaniate only once per app
@@ -53,18 +59,16 @@ function Discover() {
 
     useEffect(() => {
         revealAttestations()
-    }, [searchAddress]);
+    }, [requestAddress]);
 
     const { data, isLoading } = useReadContract({
         abi,
         address: "0x6Ae43d3271ff6888e7Fc43Fd7321a503ff738951",
         functionName: 'getUserAccountData',
         chainId: sepolia.id,
-        args: [searchAddress],
-        // old - 0x0562453c3DAFBB5e625483af58f4E6D668c44e19
+        args: [requestAddress],
     })
 
-    // if (isLoading) return; // todo implement skeleton
 
     const healthScore = Number(formatUnits((data as bigint[])?.[5] || 0n, etherUnits.wei)).toFixed(2);
     const totalDebt = (Number(formatUnits((data as bigint[])?.[1] || 0n, etherUnits.gwei)) * 10).toFixed(2);
@@ -75,10 +79,20 @@ function Discover() {
         { name: "Total collateral:", value: `${totalCollateralBase}$` },
     ];// todo: should be reusable or wrapped in hook
 
+    const handleSubmit = () => {
+        setRequestAddress(searchAddress);
+        navigate({ search: { address: searchAddress } })
+    }
+
+    if (data) {
+        console.log(Number(formatUnits((data as bigint[])?.[5], etherUnits.wei)).toFixed(2));
+    }
+
+
     return <div className="flex flex-wrap flex-col gap-2">
         <Card
             className="bg-foreground-light"
-            wrapperClassName="mr-[100%] w-[fit-content]"
+            wrapperClassName="mr-[100%] w-[fit-content] mb-2"
         >
             <Typography
                 size="heading1"
@@ -91,15 +105,20 @@ function Discover() {
         <div className="mr-[100%] flex gap-4">
             <Input
                 className="min-w-[380px]"
-                inputClassName="text-[12px]"
+                inputClassName="text-[12px] text-primary-text"
                 type="search"
                 value={searchAddress}
-                onChange={setSearchAddress}
+                onChange={e => setSearchAddress(e.target.value)}
             />
-            <Button>Check</Button>
+            <Button
+                onClick={handleSubmit}
+            >
+                Check
+            </Button>
         </div>
         <Statistics
             className="max-w-[501px]"
+            wrapperClassName="w-full"
             address={address}
             borrowData={borrowData}
             isLoading={isLoading}
@@ -115,18 +134,34 @@ function Discover() {
                 Claimed Badges:
             </Typography>
             <div className="flex gap-2 flex-wrap">
-                {badgesAttestations.map(badge => (
+                {revealLoading ? // true
+
                     <BadgeCard
-                        className="min-w-[180px]"
-                        badge={badge}
-                        onClick={function (): void {
-                            throw new Error('Function not implemented.')
-                        }}
+                        className="min-w-[165px]"
+                        badge={badgesData[0]}
+                        onClick={() => revealAttestations()}
                         attested
                         loading={false}
-                        showOnly
-                    />
-                ))}
+                        revealLoading={revealLoading}
+                        showOnly />
+                    :
+                    badgesAttestations.map(badge => (
+                        <BadgeCard
+                            className="min-w-[165px]"
+                            badge={badge}
+                            onClick={() => revealAttestations()}
+                            attested
+                            loading={false}
+                            showOnly
+                        />
+                    ))}
+                {!revealLoading && badgesAttestations.length === 0 && (
+                    <div className="h-[251px] grid m-auto">
+                        <Typography className="place-self-center">
+                            No claimed badges yet ...
+                        </Typography>
+                    </div>
+                )}
             </div>
         </Card>
         <Transactions />

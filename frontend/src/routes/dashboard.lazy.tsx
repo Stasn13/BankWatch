@@ -49,7 +49,7 @@ function Dashboard() {
     }
 
     return (
-        <>
+        <div className="flex flex-row flex-wrap gap-2">
             <Card
                 className="bg-foreground-light"
                 wrapperClassName="mb-2"
@@ -96,6 +96,6 @@ function Dashboard() {
 
                 <Typography className="rounded-xl border px-2 absolute top-3 right-3 font-black">Coming soon ...</Typography>
             </Card>
-        </>
+        </div>
     )
 }
