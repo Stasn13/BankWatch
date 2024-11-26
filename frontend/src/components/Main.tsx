@@ -10,11 +10,13 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
+   * - add skeleton and empty state for badges loader
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
    * - improve reveal on badges
    * - implement loaders and error handling
    * - implement routing and build other pages
+   * - improve BadgesCard heights
    * 
    * - add user guide and onboarding dasboard
    * - write docs/description
