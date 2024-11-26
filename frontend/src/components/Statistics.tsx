@@ -1,8 +1,9 @@
 import { Card } from '../ui/Card';
 import clsx from 'clsx';
 import { Typography } from '../ui/Typography';
+import { CardComponentProps } from '../ui/Card/types';
 
-type StatisticsProps = {
+type StatisticsProps = CardComponentProps & {
     className?: string
     address?: `0x${string}`
     borrowData: {
