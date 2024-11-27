@@ -107,8 +107,8 @@ function Home() {
             </section>
             <Banner wrapperClassName="flex-1 mb-6"
                 bgImg={bg2}
-                text="Try to have a look how other wallets might be attested"
-                btnText="Discover"
+                text="Get an example how other addresses might be attested"
+                btnText="Show me"
                 btnProps={{
                     onClick: () => navigate({ to: '/discover', search: { address: '0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83' } })
                 }}
