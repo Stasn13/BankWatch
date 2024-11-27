@@ -4,7 +4,6 @@ import {
   MouseEventHandler,
   ReactNode,
 } from 'react';
-import { Accept } from 'react-dropzone';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   start?: ReactNode;
@@ -29,7 +28,6 @@ export interface InputSearchProps extends InputProps {
 
 export interface InputUploadedPictureProps extends InputProps {
   fileName?: string;
-  acceptFile?: Accept;
   maxSize?: number;
   maxNumberImg?: number;
 }

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
 import Badges from '../components/Badges'
 import Banner from '../components/Banner'

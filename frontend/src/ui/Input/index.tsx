@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useId, useState } from 'react';
+import { forwardRef, useId, useState } from 'react';
 
 import {
   InputProps,
@@ -103,7 +103,7 @@ const InputSearch = forwardRef<HTMLInputElement, InputSearchProps>(
 
 const InputPassword = forwardRef<HTMLInputElement, InputProps>(
   ({ className, inputClassName, type, ...props }, ref) => {
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, _] = useState(false);
     return (
       <div className={clsx('relative', className)}>
         <InputField

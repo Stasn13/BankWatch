@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
 import { Typography } from '../ui/Typography'
 import { Card, CardContent, CardHeader } from '../ui/Card'

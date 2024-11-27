@@ -1,15 +1,13 @@
-import * as React from 'react'
-import { createLazyFileRoute, sear, useNavigate } from '@tanstack/react-router'
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
 import { Typography } from '../ui/Typography'
 import { Card } from '../ui/Card'
-import Badges from '../components/Badges'
 import BadgeCard from '../ui/BadgeCard'
 import { badgesData, LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants'
 import Transactions from '../components/Transcations'
 import { Input } from '../ui/Input'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/Button'
-import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk'
+import { VeraxSdk } from '@verax-attestation-registry/verax-sdk'
 import Statistics from '../components/Statistics'
 import { abi } from '../abi/aave-contract'
 import { useReadContract } from 'wagmi';
@@ -53,9 +51,9 @@ function Discover() {
         }
     };
 
-    const revealData = () => {
+    // const revealData = () => {
 
-    }
+    // }
 
     useEffect(() => {
         revealAttestations()

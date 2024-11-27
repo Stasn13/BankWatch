@@ -15,7 +15,7 @@ export const borrowDataNumbers = (data?: bigint[]) => {
 }
 
 export const borrowDataAdapter = (data?: bigint[]) => {
-    const { healthScore, healthScoreAdapted, totalDebt, totalCollateralBase } = borrowDataNumbers(data);
+    const { healthScoreAdapted, totalDebt, totalCollateralBase } = borrowDataNumbers(data);
 
     const borrowData = [
         {

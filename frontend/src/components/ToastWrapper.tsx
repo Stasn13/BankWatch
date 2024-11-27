@@ -3,7 +3,7 @@ const ToastWrapper = ({success}: {success: boolean}) => {
 
     return (
         <div>
-
+            {success && "sucess"}
         </div>
     )
 }

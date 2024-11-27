@@ -1,5 +1,4 @@
-import { Card, CardHeader } from '../ui/Card';
-import { Button } from '../ui/Button';
+import { Card } from '../ui/Card';
 import clsx from 'clsx';
 
 import { Typography } from '../ui/Typography';
@@ -15,7 +14,7 @@ type TransactionsProps = CardComponentProps & {
     btnProps?: ButtonProps
 }
 
-const Transactions = ({ className, wrapperClassName, bgImg, text, btnText, children, btnClassName, btnProps }: TransactionsProps) => {
+const Transactions = ({ className, wrapperClassName }: TransactionsProps) => {
 
     return (
         <Card

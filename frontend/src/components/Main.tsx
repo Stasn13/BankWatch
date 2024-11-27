@@ -1,12 +1,6 @@
-
-
 import Navigation from './Navigation'
-import { VeraxSdk } from '@verax-attestation-registry/verax-sdk'
-import { useAccount } from 'wagmi'
 
 function Main() {
-  const { address, chainId, isConnected, chain } = useAccount();
-  const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address);
   /**
    * BACKLOG
    * TODO:
