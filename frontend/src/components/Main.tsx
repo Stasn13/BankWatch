@@ -4,7 +4,6 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
-   * - find icons
    * - finish "How it works" section
    * - add score to discover
    * - improve mobile experience
