@@ -20,6 +20,7 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
     const [loading, setLoading] = useState(false);
     const [revealLoading, setRevealLoading] = useState(false);
     const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
+    // @ts-ignore
     const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]); // todo check re-renders
     const currentScore = useMemo(() => {
         if (!userStatistics) return 0;

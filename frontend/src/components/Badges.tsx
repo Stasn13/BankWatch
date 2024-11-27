@@ -89,6 +89,7 @@ const Badges = ({ className, veraxSdk, userStatistics }: BadgesProps) => {
             </Typography>
             <div className="flex flex-wrap gap-3">
                 {badgesData.map(badge => {
+                    // @ts-ignore
                     const attested = !!attestations.filter(attestation => (attestation.schema.id === badge.schema && attestation.decodedPayload[0].badge_claimed)).length;
                     return (
                         <BadgeCard
