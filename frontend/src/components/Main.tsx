@@ -4,12 +4,13 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
+   * - find icons
    * - finish "How it works" section
    * - add score to discover
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
    * - implement loaders and error handling
-   * - improve BadgesCard heights
+   * - improve BadgesCard heights (button jumps)
    * 
    * - add user guide and onboarding dasboard
    * - write docs/description
