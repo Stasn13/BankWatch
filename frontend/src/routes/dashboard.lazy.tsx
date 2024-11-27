@@ -11,8 +11,9 @@ import { useAccount, useReadContract } from 'wagmi';
 import bg2 from "../assets/img/bg2.png";
 import { abi } from '../abi/aave-contract';
 import { sepolia } from 'wagmi/chains';
-import { formatUnits, etherUnits } from 'viem';
 import Transactions from '../components/Transcations'
+import { borrowDataAdapter } from '../utils/borrowDataAdapter'
+import { userStatisticsAdapter } from '../utils/userStatisticsAdapter'
 
 export const Route = createLazyFileRoute('/dashboard')({
     component: Dashboard,
@@ -32,21 +33,7 @@ function Dashboard() {
         // old - 0x0562453c3DAFBB5e625483af58f4E6D668c44e19
     })
 
-    if (isLoading) return; // todo implement skeleton
-
-    const healthScore = Number(formatUnits((data as bigint[])[5], etherUnits.wei)).toFixed(2); // > 3 = yellow, > 2 = red
-    const totalDebt = (Number(formatUnits((data as bigint[])[1], etherUnits.gwei)) * 10).toFixed(2);
-    const totalCollateralBase = (Number(formatUnits((data as bigint[])[0], etherUnits.gwei)) * 10).toFixed(2)
-    const borrowData = [
-        { name: "Health score:", value: healthScore, color: Number(healthScore) > 3 ? "text-accept" : "desctructive" },
-        { name: "Total debt:", value: `${totalDebt}$` },
-        { name: "Total collateral:", value: `${totalCollateralBase}$` },
-    ];
-    const userStatistics = {
-        healthScore,
-        totalDebt,
-        totalCollateralBase
-    }
+    const userStatistics = userStatisticsAdapter(data as bigint[]);
 
     return (
         <div className="flex flex-row flex-wrap gap-2">
@@ -69,7 +56,8 @@ function Dashboard() {
             <Statistics
                 className="w-[320px]"
                 address={address}
-                borrowData={borrowData}
+                borrowData={borrowDataAdapter(data as bigint[])}
+                isLoading={isLoading}
             />
             <Banner wrapperClassName="flex-1"
                 bgImg={bg2}
