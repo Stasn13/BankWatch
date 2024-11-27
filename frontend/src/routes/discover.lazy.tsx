@@ -14,7 +14,7 @@ import Statistics from '../components/Statistics'
 import { abi } from '../abi/aave-contract'
 import { useReadContract } from 'wagmi';
 import { sepolia } from 'viem/chains'
-import { formatUnits, etherUnits } from 'viem';
+import { borrowDataAdapter } from '../utils/borrowDataAdapter'
 
 type DiscoverSearch = {
     address: number
@@ -70,22 +70,11 @@ function Discover() {
     })
 
 
-    const healthScore = Number(formatUnits((data as bigint[])?.[5] || 0n, etherUnits.wei)).toFixed(2);
-    const totalDebt = (Number(formatUnits((data as bigint[])?.[1] || 0n, etherUnits.gwei)) * 10).toFixed(2);
-    const totalCollateralBase = (Number(formatUnits((data as bigint[])?.[0] || 0n, etherUnits.gwei)) * 10).toFixed(2);
-    const borrowData = [
-        { name: "Health score:", value: healthScore, color: Number(healthScore) > 3 ? "text-accept" : "desctructive" },
-        { name: "Total debt:", value: `${totalDebt}$` },
-        { name: "Total collateral:", value: `${totalCollateralBase}$` },
-    ];// todo: should be reusable or wrapped in hook
+    
 
     const handleSubmit = () => {
         setRequestAddress(searchAddress);
         navigate({ search: { address: searchAddress } })
-    }
-
-    if (data) {
-        console.log(Number(formatUnits((data as bigint[])?.[5], etherUnits.wei)).toFixed(2));
     }
 
 
@@ -120,7 +109,7 @@ function Discover() {
             className="max-w-[501px]"
             wrapperClassName="w-full"
             address={address}
-            borrowData={borrowData}
+            borrowData={borrowDataAdapter(data as bigint[])}
             isLoading={isLoading}
         />
         <Card
@@ -163,6 +152,7 @@ function Discover() {
                     </div>
                 )}
             </div>
+            {/* TODO: add score */}
         </Card>
         <Transactions />
     </div>
