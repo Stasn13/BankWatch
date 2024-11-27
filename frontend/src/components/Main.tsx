@@ -10,12 +10,11 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
-   * - improve search logic
+   * - finish "How it works" section
+   * - add score to discover
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
-   * - improve reveal on badges
    * - implement loaders and error handling
-   * - implement routing and build other pages
    * - improve BadgesCard heights
    * 
    * - add user guide and onboarding dasboard
