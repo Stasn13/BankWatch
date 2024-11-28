@@ -6,12 +6,12 @@ import { Card } from "../Card"
 import { Typography } from "../Typography";
 
 
-const BadgeCard = ({ className, badge, onClick, attested, loading, revealLoading, disabled, showOnly }: { className?: string, badge: typeof badgesData[0], onClick: () => void, attested: boolean, loading: boolean, revealLoading?: boolean, disabled?: boolean, showOnly?: boolean }) => {
+const BadgeCard = ({ className, wrapperClassName, badge, onClick, attested, loading, revealLoading, disabled, showOnly }: { className?: string, wrapperClassName?: string, badge: typeof badgesData[0], onClick: () => void, attested: boolean, loading: boolean, revealLoading?: boolean, disabled?: boolean, showOnly?: boolean }) => {
     const { img, name, description } = badge
     return (
         <Card
-            className="bg-black" // pb-8
-            wrapperClassName={clsx(className,
+            className={clsx(className, "bg-black")} // pb-8
+            wrapperClassName={clsx(wrapperClassName,
                 disabled && "opacity-30",
                 revealLoading && "animate-pulse bg-foreground-light opacity-70",
                 "min-w-[220px] basis-[calc(33.33333%-0.75rem)] lg:basis-[calc(25%-0.75rem)] relative")}
@@ -32,7 +32,7 @@ const BadgeCard = ({ className, badge, onClick, attested, loading, revealLoading
                 <>
                     <Typography
                         size="body3"
-                        className="text-secondary-text text-left mb-2"
+                        className="text-secondary-text text-left mb-2 h-[96px]"
                     >
                         {description}
                     </Typography>
