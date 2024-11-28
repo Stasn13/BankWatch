@@ -110,7 +110,7 @@ function Discover() {
         <div className="mr-[100%] flex gap-4">
             <Input
                 className="min-w-[380px]"
-                inputClassName="text-[12px] text-primary-text"
+                inputClassName="text-[12px] text-secondary-text"
                 placeholder='Type address here'
                 type="search"
                 value={searchAddress}
@@ -126,7 +126,7 @@ function Discover() {
             wrapperClassName="max-w-[501px] w-full"
             address={address}
             borrowData={borrowDataAdapter(data as bigint[])}
-            isLoading={isLoading}
+            isLoading={!data && isLoading}
         />
         <Card
             bgImg={bg1}
@@ -143,7 +143,7 @@ function Discover() {
                         "place-self-center",
                         revealScoreLoading && "animate-pulse bg-foreground-light text-foreground-light rounded-xl w-[60px] h-[48px]")}
                 >
-                    {recentScore}
+                    {recentScore || "n/a"}
                 </Typography>
             </CardContent>
         </Card>
