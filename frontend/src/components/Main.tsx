@@ -5,6 +5,7 @@ function Main() {
    * BACKLOG
    * TODO:
    * - carousel for badges
+   * - add hint for users not interacted with zeroLend
    * - containers?
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
