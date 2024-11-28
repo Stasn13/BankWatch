@@ -4,11 +4,11 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
+   * - carousel for badges
    * - containers?
-   * - add score to discover
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
-   * - implement loaders and error handling
+   * - implement error handling
    * - improve BadgesCard heights (button jumps)
    * 
    * - add user guide and onboarding dasboard
@@ -22,6 +22,7 @@ function Main() {
    * - improve layout, fix connectbtn
    * - connect score attestations
    * - finish busines logic getting attestattions
+   * - add score to discover
    */
 
   return (
