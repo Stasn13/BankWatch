@@ -28,11 +28,12 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
         return calculateScore(Number(healthScore), Number(totalCollateralBase), Number(totalDebt));
 
     }, [userStatistics?.healthScore, userStatistics?.totalCollateralBase, userStatistics?.totalDebt]);
-    console.log(currentScore)
+
     const revealScoreAttestations = async () => {
         setRevealLoading(true)
         try {
             const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address, schema: LINEA_SEPOLIA_BANK_SCORE });
+            console.log(address)
             setScoreAttestations(scoresList)
             console.log(scoresList);
         } catch (e) {

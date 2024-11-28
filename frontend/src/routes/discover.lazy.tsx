@@ -7,7 +7,7 @@ import Transactions from '../components/Transcations'
 import { Input } from '../ui/Input'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/Button'
-import { VeraxSdk } from '@verax-attestation-registry/verax-sdk'
+import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk'
 import Statistics from '../components/Statistics'
 import { abi } from '../abi/aave-contract'
 import { useReadContract } from 'wagmi';
@@ -30,8 +30,24 @@ function Discover() {
     const [searchAddress, setSearchAddress] = useState(address);
     const [requestAddress, setRequestAddress] = useState(address);
     const [revealLoading, setRevealLoading] = useState(false);
+    const [revealScoreLoading, setRevealScoreLoading] = useState(false);
     const [badgesAttestations, setBadgesAttestations] = useState<typeof badgesData>([]);
+    const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
     const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address); // Todo find the way to instaniate only once per app
+
+    const revealScoreAttestations = async () => {
+        setRevealScoreLoading(true)
+        try {
+            const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address, schema: LINEA_SEPOLIA_BANK_SCORE });
+            console.log(address)
+            setScoreAttestations(scoresList)
+            console.log(scoresList);
+        } catch (e) {
+            console.log(`${e}`);
+        } finally {
+            setRevealScoreLoading(false)
+        }
+    };
 
     const revealAttestations = async () => { // TODO: function should be reusable
         setRevealLoading(true);

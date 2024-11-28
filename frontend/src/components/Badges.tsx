@@ -16,7 +16,7 @@ type BadgesProps = {
 }
 
 const Badges = ({ className, veraxSdk, userStatistics }: BadgesProps) => {
-    const { address } = useAccount();
+    const { address, isConnected } = useAccount();
     const [attestations, setAttestations] = useState<Attestation[]>([]);
     const [issueLoading, setIssueLoading] = useState<string | boolean>(false);
     const [revealLoading, setRevealLoading] = useState(false);
@@ -100,6 +100,7 @@ const Badges = ({ className, veraxSdk, userStatistics }: BadgesProps) => {
                             disabled={!attested && !badge.eligible(userStatistics)}
                             // attested={false} // to test conditions
                             loading={revealLoading || (issueLoading === badge.badgeName)} // todo implement reveal laoding as skeleton
+                            revealLoading={!isConnected}
                         />)
                 })}
             </div>

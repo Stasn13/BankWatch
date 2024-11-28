@@ -13,16 +13,18 @@ import { sepolia } from 'wagmi/chains';
 import Transactions from '../components/Transcations'
 import { borrowDataAdapter } from '../utils/borrowDataAdapter'
 import { userStatisticsAdapter } from '../utils/userStatisticsAdapter'
+import { ConnectKitButton } from 'connectkit'
+import clsx from 'clsx'
 
 export const Route = createLazyFileRoute('/dashboard')({
     component: Dashboard,
 })
 
 function Dashboard() {
-    const { address } = useAccount();
+    const { address, isConnected } = useAccount();
     const navigate = useNavigate();
     const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address);
-    if (!address) return
+
     const { data, isLoading } = useReadContract({
         abi,
         address: "0x6Ae43d3271ff6888e7Fc43Fd7321a503ff738951",
@@ -35,7 +37,18 @@ function Dashboard() {
     const userStatistics = userStatisticsAdapter(data as bigint[]);
 
     return (
-        <div className="flex flex-row flex-wrap gap-2">
+        <div className={clsx(!isConnected && "h-[98vh] overflow-hidden", "flex flex-row flex-wrap gap-2 relative")}>
+            {!isConnected &&
+                <div
+                    className="absolute w-full h-full z-10 grid"
+                    style={{
+                        background: "linear-gradient(to top, rgb(0, 0, 0) 42%, transparent)"
+                    }}>
+                    <div className='place-self-center'>
+                        <ConnectKitButton />
+                    </div>
+                </div>
+            }
             <Card
                 className="bg-foreground-light"
                 wrapperClassName="mb-2"

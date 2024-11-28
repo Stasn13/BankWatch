@@ -4,6 +4,7 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
+   * - containers?
    * - add score to discover
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
