@@ -5,14 +5,11 @@ function Main() {
    * BACKLOG
    * TODO:
    * - add hint for users not interacted with zeroLend
-   * - containers?
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
    * - implement error handling
    * 
-   * - add user guide and onboarding dasboard
    * - write docs/description
-   * - prepare release
    * - write post in linkedIn
    * - add new badges, enhance svg's
    * - implement "Coming soon" feaatures
@@ -24,6 +21,8 @@ function Main() {
    * - add score to discover
    * - carousel for badges
    * - improve BadgesCard heights (button jumps)
+   * - containers?
+   * - add user guide and onboarding dasboard
    */
 
   return (

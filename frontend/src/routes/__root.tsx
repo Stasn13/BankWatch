@@ -13,7 +13,7 @@ export const Route = createRootRoute({
             <div className="flex px-4 h-[100vh] overflow-hidden">
                 <Navigation />
                 <main
-                    className="w-full px-8 overflow-y-auto pt-4 pb-12"
+                    className="w-full px-8 overflow-y-auto pt-4 pb-12 max-w-[1200px] mx-auto"
                 // flex flex-row gap-2 flex-wrap
                 >
                     <Outlet />
