@@ -14,10 +14,13 @@ type StatisticsProps = CardComponentProps & {
     isLoading?: boolean
 }
 
-const Statistics = ({ className, borrowData, isLoading }: StatisticsProps) => {
+const Statistics = ({ className, borrowData, isLoading, wrapperClassName }: StatisticsProps) => {
 
     return (
-        <Card className={clsx(className, "bg-foreground-light text-left")}>
+        <Card
+            className={clsx(className, "bg-foreground-light text-left")}
+            wrapperClassName={wrapperClassName}
+        >
             <Typography
                 className="mb-4"
                 size='heading5'
