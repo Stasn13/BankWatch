@@ -1,11 +1,11 @@
 import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
 import { Typography } from '../ui/Typography'
-import { Card } from '../ui/Card'
+import { Card, CardContent, CardHeader } from '../ui/Card'
 import BadgeCard from '../ui/BadgeCard'
-import { badgesData, LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants'
+import { badgesData, LINEA_SEPOLIA_BANK_SCORE, LINEA_SEPOLIA_PORTAL_ADDRESS } from '../constants'
 import Transactions from '../components/Transcations'
 import { Input } from '../ui/Input'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Button } from '../ui/Button'
 import { Attestation, VeraxSdk } from '@verax-attestation-registry/verax-sdk'
 import Statistics from '../components/Statistics'
@@ -14,6 +14,7 @@ import { useReadContract } from 'wagmi';
 import { sepolia } from 'viem/chains'
 import { borrowDataAdapter } from '../utils/borrowDataAdapter';
 import bg1 from "../assets/img/purple-gradient.png";
+import clsx from 'clsx'
 
 // type DiscoverSearch = {
 //     address: string
@@ -34,14 +35,14 @@ function Discover() {
     const [badgesAttestations, setBadgesAttestations] = useState<typeof badgesData>([]);
     const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
     const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address); // Todo find the way to instaniate only once per app
+    //@ts-ignore
+    const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]);
 
     const revealScoreAttestations = async () => {
         setRevealScoreLoading(true)
         try {
-            const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address, schema: LINEA_SEPOLIA_BANK_SCORE });
-            console.log(address)
+            const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address || 0, schema: LINEA_SEPOLIA_BANK_SCORE });
             setScoreAttestations(scoresList)
-            console.log(scoresList);
         } catch (e) {
             console.log(`${e}`);
         } finally {
@@ -75,6 +76,7 @@ function Discover() {
 
     useEffect(() => {
         revealAttestations()
+        revealScoreAttestations()
     }, [requestAddress]);
 
     const { data, isLoading } = useReadContract({
@@ -85,9 +87,6 @@ function Discover() {
         args: [requestAddress],
     })
 
-
-
-
     const handleSubmit = () => {
         setRequestAddress(searchAddress);
         // @ts-ignore
@@ -95,7 +94,7 @@ function Discover() {
     }
 
 
-    return <div className="flex flex-wrap flex-col gap-2">
+    return <div className="flex flex-wrap flex-row gap-2">
         <Card
             className="bg-foreground-light"
             wrapperClassName="mr-[100%] w-[fit-content] mb-2"
@@ -124,16 +123,29 @@ function Discover() {
             </Button>
         </div>
         <Statistics
-            className="max-w-[501px]"
-            wrapperClassName="w-full"
+            wrapperClassName="max-w-[501px] w-full"
             address={address}
             borrowData={borrowDataAdapter(data as bigint[])}
             isLoading={isLoading}
         />
         <Card
             bgImg={bg1}
+            wrapperClassName="w-[calc(100%-501px-0.5rem)] overflow-hidden"
         >
-
+            <CardHeader>
+                <Typography>Bank Score minted:</Typography>
+            </CardHeader>
+            <CardContent className="gird">
+                <Typography
+                    variant="heading1"
+                    size="heading1"
+                    className={clsx(
+                        "place-self-center",
+                        revealScoreLoading && "animate-pulse bg-foreground-light text-foreground-light rounded-xl w-[60px] h-[48px]")}
+                >
+                    {recentScore}
+                </Typography>
+            </CardContent>
         </Card>
         <Card
             className="bg-foreground-light flex flex-col"
