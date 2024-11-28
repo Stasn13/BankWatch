@@ -21,7 +21,7 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
     const [revealLoading, setRevealLoading] = useState(false);
     const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
     // @ts-ignore
-    const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]); // todo check re-renders
+    const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]);
     const currentScore = useMemo(() => {
         if (!userStatistics) return 0;
         const { healthScore, totalCollateralBase, totalDebt } = userStatistics;
@@ -33,9 +33,7 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
         setRevealLoading(true)
         try {
             const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address, schema: LINEA_SEPOLIA_BANK_SCORE });
-            console.log(address)
             setScoreAttestations(scoresList)
-            console.log(scoresList);
         } catch (e) {
             console.log(`${e}`);
         } finally {
