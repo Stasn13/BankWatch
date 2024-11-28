@@ -3,6 +3,19 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import Navigation from '../components/Navigation'
 import { ConnectKitButton } from 'connectkit'
 import { Web3Provider } from '../web3provider'
+import React from 'react'
+
+const TanStackRouterDevtoolsEnv =
+  process.env.NODE_ENV === 'production'
+    ? () => null // Render nothing in production
+    : React.lazy(() =>
+        // Lazy load in development
+        import('@tanstack/router-devtools').then((res) => ({
+          default: res.TanStackRouterDevtools,
+          // For Embedded Mode
+          // default: res.TanStackRouterDevtoolsPanel
+        })),
+      )
 
 export const Route = createRootRoute({
     component: () => (
@@ -14,10 +27,10 @@ export const Route = createRootRoute({
                 <Navigation />
                 <main
                     className="w-full px-8 overflow-y-auto pt-4 pb-12 max-w-[1200px] mx-auto"
-                // flex flex-row gap-2 flex-wrap
+                    // flex flex-row gap-2 flex-wrap
                 >
                     <Outlet />
-                    <TanStackRouterDevtools />
+                    <TanStackRouterDevtoolsEnv />
                 </main>
             </div>
         </Web3Provider>
