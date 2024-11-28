@@ -113,7 +113,6 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
                             </Typography>
                         </>
                     }
-                    { }
                 </div>
                 <div className="flex items-baseline">
                     <span className="mr-2">

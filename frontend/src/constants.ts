@@ -12,9 +12,9 @@ export const LINEA_SEPOLIA_COLLATERAL1000_BADGE = "0x8c84aae5181fd0a1a2440de031b
 
 export const LINEA_SEPOLIA_BANK_SCORE = "0x6b46b72dff4589958a45395d42366455a966477ca7a4f49267c000f2719e04ca";
 export type UserStatistics = {
-    healthScore: string
-    totalDebt: string
-    totalCollateralBase: string
+    healthScore: number
+    totalDebt: number
+    totalCollateralBase: number
 }
 
 export const badgesData = [
@@ -48,7 +48,7 @@ export const badgesData = [
         schema: LINEA_SEPOLIA_COLLATERAL500_BADGE,
         criteriaName: "totalCollateralBase",
         eligible: function (statistics: UserStatistics) {
-            return Number(statistics[this.criteriaName as keyof UserStatistics]) > 500
+            return statistics[this.criteriaName as keyof UserStatistics] > 500
         }
     },
     {
@@ -59,7 +59,7 @@ export const badgesData = [
         schema: LINEA_SEPOLIA_COLLATERAL1000_BADGE,
         criteriaName: "totalCollateralBase",
         eligible: function (statistics: UserStatistics): boolean {
-            return Number(statistics[this.criteriaName as keyof UserStatistics]) > 1000
+            return statistics[this.criteriaName as keyof UserStatistics] > 1000
         }
     }
 ]

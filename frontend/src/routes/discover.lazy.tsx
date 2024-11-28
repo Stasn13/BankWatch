@@ -12,17 +12,19 @@ import Statistics from '../components/Statistics'
 import { abi } from '../abi/aave-contract'
 import { useReadContract } from 'wagmi';
 import { sepolia } from 'viem/chains'
-import { borrowDataAdapter } from '../utils/borrowDataAdapter'
+import { borrowDataAdapter } from '../utils/borrowDataAdapter';
+import bg1 from "../assets/img/purple-gradient.png";
 
-type DiscoverSearch = {
-    address: number
-}
+// type DiscoverSearch = {
+//     address: string
+// }
 
 export const Route = createLazyFileRoute('/discover')({
     component: Discover,
 })
 
 function Discover() {
+    // @ts-ignore
     const { address } = Route.useSearch();
     const navigate = useNavigate();
     const [searchAddress, setSearchAddress] = useState(address);
@@ -68,10 +70,11 @@ function Discover() {
     })
 
 
-    
+
 
     const handleSubmit = () => {
         setRequestAddress(searchAddress);
+        // @ts-ignore
         navigate({ search: { address: searchAddress } })
     }
 
@@ -110,6 +113,11 @@ function Discover() {
             borrowData={borrowDataAdapter(data as bigint[])}
             isLoading={isLoading}
         />
+        <Card
+            bgImg={bg1}
+        >
+
+        </Card>
         <Card
             className="bg-foreground-light flex flex-col"
             wrapperClassName="w-full"

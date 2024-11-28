@@ -9,8 +9,8 @@ export const borrowDataNumbers = (data?: bigint[]) => {
     return {
         healthScore,
         healthScoreAdapted,
-        totalDebt,
-        totalCollateralBase
+        totalDebt: Number(totalDebt),
+        totalCollateralBase: Number(totalCollateralBase)
     }
 }
 
