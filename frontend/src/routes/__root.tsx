@@ -1,11 +1,10 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import Navigation from '../components/Navigation'
 import { ConnectKitButton } from 'connectkit'
 import { Web3Provider } from '../web3provider'
 import React from 'react'
 
-const TanStackRouterDevtoolsEnv =
+const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => null // Render nothing in production
     : React.lazy(() =>
@@ -30,7 +29,7 @@ export const Route = createRootRoute({
                     // flex flex-row gap-2 flex-wrap
                 >
                     <Outlet />
-                    <TanStackRouterDevtoolsEnv />
+                    <TanStackRouterDevtools />
                 </main>
             </div>
         </Web3Provider>
