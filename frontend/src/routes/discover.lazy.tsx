@@ -148,20 +148,19 @@ function Discover() {
             </CardContent>
         </Card>
         <Card
-            className="bg-foreground-light flex flex-col"
+            className="bg-foreground-light flex flex-col !p-0 !pb-3"
             wrapperClassName="w-full"
         >
             <Typography
-                className="mb-4"
+                className="p-6 pb-4"
                 size='heading5'
             >
                 Claimed Badges:
             </Typography>
-            <div className="flex gap-2 flex-wrap">
-                {revealLoading ? // true
-
+            <div className="flex gap-2 w-full overflow-x-auto snap-mandatory">
+                {revealLoading ?
                     <BadgeCard
-                        className="min-w-[165px]"
+                        wrapperClassName="min-w-[165px] snap-start first:ml-6 last:mr-6 mb-3"
                         badge={badgesData[0]}
                         onClick={() => revealAttestations()}
                         attested
@@ -171,7 +170,7 @@ function Discover() {
                     :
                     badgesAttestations.map(badge => (
                         <BadgeCard
-                            className="min-w-[165px]"
+                            wrapperClassName="min-w-[165px] snap-start first:ml-6 last:mr-6 mb-3"
                             badge={badge}
                             onClick={() => revealAttestations()}
                             attested

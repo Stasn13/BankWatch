@@ -80,19 +80,23 @@ const Badges = ({ className, veraxSdk, userStatistics }: BadgesProps) => {
     }, [address]);
 
     return (
-        <Card className={clsx(className, "bg-foreground-light")}>
+        <Card
+            className={clsx(className, "bg-foreground-light !p-0 !pb-3")}
+            wrapperClassName="w-full"
+        >
             <Typography
-                className="mb-4"
+                className="p-6 pb-4"
                 size='heading5'
             >
                 Badges:
             </Typography>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex gap-3 w-full overflow-x-auto snap-mandatory">
                 {badgesData.map(badge => {
                     // @ts-ignore
                     const attested = !!attestations.filter(attestation => (attestation.schema.id === badge.schema && attestation.decodedPayload[0].badge_claimed)).length;
                     return (
                         <BadgeCard
+                            wrapperClassName="snap-start first:ml-6 last:mr-6 mb-3"
                             badge={badge}
                             key={badge.name}
                             onClick={() => issueAttestation(badge.schema, badge.badgeName)}
