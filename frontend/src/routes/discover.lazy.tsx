@@ -96,6 +96,7 @@ function Discover() {
             <Input
                 className="min-w-[380px]"
                 inputClassName="text-[12px] text-primary-text"
+                placeholder='Type address here'
                 type="search"
                 value={searchAddress}
                 onChange={e => setSearchAddress(e.target.value)}
