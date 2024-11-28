@@ -113,7 +113,12 @@ input[type='number'] {
 
 @media (min-width: 640px) {
   ::-webkit-scrollbar {
-    width: 0.5rem;
+    padding: 2rem;
+    width: 0.25rem;
+  }
+
+  ::-webkit-scrollbar:horizontal {
+    height: 0.25rem;
   }
 
   ::-webkit-scrollbar-track {
