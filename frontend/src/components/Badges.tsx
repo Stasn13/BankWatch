@@ -103,7 +103,7 @@ const Badges = ({ className, veraxSdk, userStatistics }: BadgesProps) => {
                             attested={attested}
                             disabled={!attested && !badge.eligible(userStatistics)}
                             // attested={false} // to test conditions
-                            loading={revealLoading || (issueLoading === badge.badgeName)} // todo implement reveal laoding as skeleton
+                            loading={!isConnected || revealLoading || (issueLoading === badge.badgeName)} // todo implement reveal laoding as skeleton
                             revealLoading={!isConnected}
                         />)
                 })}

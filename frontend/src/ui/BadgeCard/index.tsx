@@ -19,8 +19,8 @@ const BadgeCard = ({ className, wrapperClassName, badge, onClick, attested, load
             <Typography
                 component="p"
                 className={clsx(showOnly && "text-[12px]",
-                    revealLoading && "animate-pulse bg-foreground-light text-[#ffffff00]",
-                    "text-primary-text text-left mb-2")}
+                    "text-primary-text text-left mb-2",
+                    revealLoading && "animate-pulse bg-foreground-light !text-[#fafafa00]")}
             >
                 {name}
             </Typography>
