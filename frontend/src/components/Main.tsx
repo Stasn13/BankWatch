@@ -4,10 +4,12 @@ function Main() {
   /**
    * BACKLOG
    * TODO:
+   * - top users
    * - add hint for users not interacted with zeroLend
    * - improve mobile experience
    * - check other wallets (null states, empty components, users not attended to zeroLend)
    * - implement error handling
+   * - implement interactive wheel for score
    * 
    * - write docs/description
    * - write post in linkedIn
