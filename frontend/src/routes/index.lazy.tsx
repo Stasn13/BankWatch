@@ -165,7 +165,7 @@ function Home() {
                             Allow our system to assess your lending/borrowing activity on the &nbsp;
                             <a
                                 target='_blank'
-                                href='https://explorer.ver.ax/linea-sepolia'
+                                href='https://alpha.zerolend.xyz/dashboard/?marketName=proto_sepolia_v3'
                                 className="text-primary font-bold"
                             >
                                 ZeroLend
