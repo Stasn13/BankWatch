@@ -74,7 +74,7 @@ function Home() {
                     </Typography>
                 </div>
             </section>
-            <Card className="bg-foreground-light max-w-[960px] mb-6">
+            <Card className="bg-foreground-light mb-6">
                 <CardHeader>
                     <Typography
                         variant='heading2'
