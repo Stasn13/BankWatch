@@ -27,7 +27,7 @@ export const calculateScore = (healthScore: number, totalCollateralBase: number,
             case totalDebt >= 100:
                 return 25;
             default:
-                return 21;
+                return 1;
         }
     }
     const collateralRate = () => {
@@ -43,10 +43,9 @@ export const calculateScore = (healthScore: number, totalCollateralBase: number,
             case totalCollateralBase >= 500:
                 return 3;
             default:
-                return 21;
+                return 1;
         }
     }
-
     return healthRate() + debtRate() + collateralRate()
 
 }
