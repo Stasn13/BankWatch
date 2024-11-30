@@ -21,7 +21,7 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
     const [revealLoading, setRevealLoading] = useState(false);
     const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
     // @ts-ignore
-    const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]);
+    const recentScore = useMemo(() => [...scoreAttestations]?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]);
     const currentScore = useMemo(() => {
         if (!userStatistics) return 0;
         const { healthScoreAdapted, totalCollateralBase, totalDebt } = userStatistics;

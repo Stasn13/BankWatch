@@ -36,13 +36,14 @@ function Discover() {
     const [scoreAttestations, setScoreAttestations] = useState<Attestation[]>([]);
     const veraxSdk = new VeraxSdk(VeraxSdk.DEFAULT_LINEA_SEPOLIA_FRONTEND, address); // Todo find the way to instaniate only once per app
     //@ts-ignore
-    const recentScore = useMemo(() => scoreAttestations?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]);
+    const recentScore = useMemo(() => [...scoreAttestations]?.pop()?.decodedPayload?.[0].bank_score ?? undefined, [scoreAttestations]);
 
     const revealScoreAttestations = async () => {
         setRevealScoreLoading(true)
         try {
-            const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: address || 0, schema: LINEA_SEPOLIA_BANK_SCORE });
-            setScoreAttestations(scoresList)
+            const scoresList = await veraxSdk.attestation.findBy(50, 0, { portal: LINEA_SEPOLIA_PORTAL_ADDRESS, subject: requestAddress || 0, schema: LINEA_SEPOLIA_BANK_SCORE });
+            setScoreAttestations(scoresList);
+            console.log(scoresList);
         } catch (e) {
             console.log(`${e}`);
         } finally {
@@ -58,11 +59,11 @@ function Discover() {
                 0,
                 {
                     portal: LINEA_SEPOLIA_PORTAL_ADDRESS,
-                    subject: address || 0
+                    subject: requestAddress || 0
                 });
             const attestedBadges = badgesData.filter(badge => attestationsList.filter(attestation => attestation.schema.id === badge.schema).length)
             setBadgesAttestations(attestedBadges)
-            console.log(attestationsList);
+            console.log(attestedBadges);
         } catch (e) {
             console.log(`${e}`);
         } finally {
@@ -75,8 +76,8 @@ function Discover() {
     // }
 
     useEffect(() => {
-        revealAttestations()
-        revealScoreAttestations()
+        revealAttestations();
+        revealScoreAttestations();
     }, [requestAddress]);
 
     const { data, isLoading } = useReadContract({
