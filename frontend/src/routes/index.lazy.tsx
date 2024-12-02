@@ -142,7 +142,7 @@ function Home() {
                             // size='heading3'
                             className="font-bold mb-2"
                         >
-                            1. Connect Your Wallet"
+                            1. Connect Your Wallet
                         </Typography>
                         <Typography
                             variant='heading2'
