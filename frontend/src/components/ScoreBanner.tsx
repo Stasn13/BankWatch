@@ -95,13 +95,13 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
             btnProps={{ isLoading: loading, onClick: () => claimScore() }}
         >
             <div className={clsx(className, "flex justify-between")}>
-                <div className="flex items-baseline">
+                <div className="flex flex-col md:flex-row items-baseline">
                     {revealLoading ? (
                         <div className="animate-pulse bg-foreground-light text-foreground-light rounded-xl w-[210px] h-[36px]" />)
                         :
                         recentScore &&
                         <>
-                            <span className="mr-2">
+                            <span className="mr-2 mb-2 md:mb-0">
                                 You have scored previously:
                             </span>
                             <Typography
@@ -113,8 +113,8 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
                         </>
                     }
                 </div>
-                <div className="flex items-baseline">
-                    <span className="mr-2">
+                <div className="flex flex-col md:flex-row items-baseline">
+                    <span className="mr-2 mb-2 md:mb-0">
                         You are eligible to claim
                     </span>
                     <Typography

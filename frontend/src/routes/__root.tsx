@@ -22,10 +22,10 @@ export const Route = createRootRoute({
             <div className="absolute right-8 top-4 z-20">
                 <ConnectKitButton />
             </div>
-            <div className="flex px-4 h-[100vh] overflow-hidden">
+            <div className="flex p-2 md:px-4 gap-2 md:gap-0 h-[100vh] overflow-hidden">
                 <Navigation />
                 <main
-                    className="w-full px-8 overflow-y-auto pt-4 pb-12 max-w-[1200px] mx-auto"
+                    className="w-full px-0 md:px-8 overflow-y-auto pt-4 pb-12 max-w-[1200px] mx-auto"
                     // flex flex-row gap-2 flex-wrap
                 >
                     <Outlet />

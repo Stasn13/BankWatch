@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 export const cardVariants = cva('bg-background', {
   variants: {
     size: {
-      default: 'p-6',
+      default: 'p-4 md:p-6',
       md: 'p-4',
       sm: 'p-3',
     },
