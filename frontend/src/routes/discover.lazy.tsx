@@ -158,10 +158,10 @@ function Discover() {
             >
                 Claimed Badges:
             </Typography>
-            <div className="flex gap-2 w-full overflow-x-auto snap-mandatory">
+            <div className="flex gap-2 w-full overflow-x-auto snap-mandatory snap-x">
                 {revealLoading ?
                     <BadgeCard
-                        wrapperClassName="min-w-[165px] snap-start first:ml-6 last:mr-6 mb-3"
+                        wrapperClassName="min-w-[165px] snap-center first:ml-6 last:mr-6 mb-3"
                         badge={badgesData[0]}
                         onClick={() => revealAttestations()}
                         attested
