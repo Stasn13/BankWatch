@@ -93,8 +93,9 @@ const ScoreBanner = ({ className, veraxSdk, address, userStatistics }: ScoreBann
             btnText="Claim"
             bgImg={bg1}
             btnProps={{ isLoading: loading, onClick: () => claimScore() }}
+            btnClassName="right-4 px-4 md:px-4"
         >
-            <div className={clsx(className, "flex justify-between")}>
+            <div className={clsx(className, "flex flex-col md:flex-row justify-between")}>
                 <div className="flex flex-col md:flex-row items-baseline">
                     {revealLoading ? (
                         <div className="animate-pulse bg-foreground-light text-foreground-light rounded-xl w-[210px] h-[36px]" />)

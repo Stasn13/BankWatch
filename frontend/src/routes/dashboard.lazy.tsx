@@ -66,19 +66,20 @@ function Dashboard() {
                 userStatistics={userStatistics}
             />
             <Statistics
-                className="w-[320px]"
+                wrapperClassName="max-w-[320px] w-full"
                 address={address}
                 borrowData={borrowDataAdapter(data as bigint[])}
                 isLoading={isLoading}
             />
-            <Banner wrapperClassName="flex-1"
+            <Banner 
+            wrapperClassName="flex-1 min-w-[320px]"
                 bgImg={bg2}
                 text="Now you can observe other wallets eligibility"
                 btnText="Discover"
                 btnProps={{
                     onClick: () => navigate({ to: '/discover', search: { address: '0x230cDe8909aeBBc48CfBDf6fCc9A642439d77F83' } })
                 }}
-                btnClassName="absolute bottom-4 right-4"
+                btnClassName="absolute bottom-4 right-4 px-4 md:px-4"
             />
             <Transactions />
             <ScoreBanner

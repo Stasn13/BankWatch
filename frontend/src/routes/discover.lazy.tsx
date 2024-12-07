@@ -108,9 +108,9 @@ function Discover() {
                 Discover
             </Typography>
         </Card>
-        <div className="mr-[100%] flex gap-4">
+        <div className="md:mr-[100%] flex flex-wrap md:flex-nowrap gap-4">
             <Input
-                className="min-w-[380px]"
+                className="md:w-[380px] w-full"
                 inputClassName="text-[12px] text-secondary-text"
                 placeholder='Type address here'
                 type="search"
@@ -131,7 +131,7 @@ function Discover() {
         />
         <Card
             bgImg={bg1}
-            wrapperClassName="w-[calc(100%-501px-0.5rem)] overflow-hidden"
+            wrapperClassName="w-full min-w-[160px] md:w-[calc(100%-501px-0.5rem)] overflow-hidden"
         >
             <CardHeader>
                 <Typography>Bank Score minted:</Typography>
@@ -171,7 +171,7 @@ function Discover() {
                     :
                     badgesAttestations.map(badge => (
                         <BadgeCard
-                            wrapperClassName="min-w-[165px] snap-start first:ml-6 last:mr-6 mb-3"
+                            wrapperClassName="min-w-[165px] snap-center first:ml-6 last:mr-6 mb-3"
                             badge={badge}
                             onClick={() => revealAttestations()}
                             attested
