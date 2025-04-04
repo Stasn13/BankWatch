@@ -8,6 +8,9 @@ dependencies:
   '@radix-ui/react-dialog':
     specifier: ^1.1.14
     version: 1.1.14(@types/react-dom@18.3.7)(@types/react@18.3.22)(react-dom@18.3.1)(react@18.3.1)
+  '@radix-ui/react-slot':
+    specifier: ^1.2.3
+    version: 1.2.3(@types/react@18.3.22)(react@18.3.1)
   '@tailwindcss/vite':
     specifier: ^4.1.7
     version: 4.1.7(vite@5.4.19)
